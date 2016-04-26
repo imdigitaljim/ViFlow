@@ -38,7 +38,7 @@ public class FormController : MonoBehaviour {
         client = new UdpClient(port);
         anyIP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
         allReceivedUDPPackets = new List<string>();
-        _effectGen = GameObject.Find("MasterControl").GetComponent<EffectGenerator>();
+        //_effectGen = GameObject.Find("MasterControl").GetComponent<EffectGenerator>(); //production system component
     }
 
     // Update is called once per frame
@@ -194,7 +194,7 @@ public class FormController : MonoBehaviour {
             bodies[i].RightHand = bodies[i].Root.transform.GetChild(0).gameObject;
             bodies[i].LeftHand = bodies[i].Root.transform.GetChild(1).gameObject;
             bodies[i].Root.transform.parent = transform;
-            _effectGen.SetCurrentEffect(bodies[i]);
+            //_effectGen.SetCurrentEffect(bodies[i]);
         }
     }
     private void UpdateForms(int id, IList<string> msg)

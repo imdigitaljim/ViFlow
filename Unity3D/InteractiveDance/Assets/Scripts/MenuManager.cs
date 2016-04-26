@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     public Texture[] TextureList = new Texture[TextureCount];
     public GameObject[] PrefabToActivate = new GameObject[TextureCount];
     public bool[] IsAttached = new bool[TextureCount];
-    private GameObject[] _options = new GameObject[OptionMax];
+    private GameObject[] _options = new GameObject[OptionMax]; //this is the list of objections
     
 
     private int _newRange = 0;
@@ -30,7 +30,7 @@ public class MenuManager : MonoBehaviour
         for (var i = 0; i < OptionMax; i++)
 	    {
             _options[i] = transform.GetChild(i).gameObject;
-	        _options[i].GetComponent<OptionSelector>().id = i;
+	        _options[i].transform.GetChild(0).gameObject.GetComponent<OptionSelector>().id = i;
 	    }
 	}
 	
@@ -63,13 +63,11 @@ public class MenuManager : MonoBehaviour
         	Debug.Log((x + CurrentRange) + " is activated");
         	foreach (Transform child in Effect.transform)
         	{
-				//if(child != null)
-					{Destroy(child.gameObject);}
+        	    Destroy(child.gameObject);
         	}
         	foreach (Transform child in AttachedEffect.transform)
     	    {
-				//if(child != null)
-					{Destroy(child.gameObject);}
+			    Destroy(child.gameObject);
         	}
 		}
 		catch (System.Exception e)

@@ -10,7 +10,7 @@ public class OptionSelector : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        _menuManager = transform.parent.gameObject.GetComponent<MenuManager>();
+        _menuManager = transform.parent.parent.gameObject.GetComponent<MenuManager>();
     }
 
     // Update is called once per frame
