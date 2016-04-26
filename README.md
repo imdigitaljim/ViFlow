@@ -15,5 +15,7 @@ Download the zip from:
 https://drive.google.com/open?id=0B5b5KzHnx3yxTzh0QVFfcW5OYmM
 
 Extract this into Unity3D/InteractiveDance/Assets
+so the resulting path is:
+Unity3D/InteractiveDance/Assets/ImportedLibraries/(all the files)
 
 Place all assets here and update the asset file seperately.

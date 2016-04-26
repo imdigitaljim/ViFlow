@@ -19,8 +19,8 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
-*.zip
-*.7z
+*.zip*
+*.7z*
  
 # ============ #
 # OS generated #
