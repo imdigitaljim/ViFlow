@@ -11,5 +11,9 @@ Use 'ESC' to exit.
 
 Controls are available on the control panel as well.
 
-
+Download the zip from:
 https://drive.google.com/open?id=0B5b5KzHnx3yxTzh0QVFfcW5OYmM
+
+Extract this into Unity3D/InteractiveDance/Assets
+
+Place all assets here and update the asset file seperately.
