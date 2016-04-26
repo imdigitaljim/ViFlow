@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a822755ce208e8741993de5bbb5775c6
+timeCreated: 1449278151
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - cube: {fileID: 104876, guid: 92bd0feec4a6e724c85e175f12314148, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
