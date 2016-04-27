@@ -378,7 +378,8 @@ cap = cv2.VideoCapture(0)
 fname = "02_100.MP4"
 flength = 100 # Length of video file in frames
 loop = False
-#cap = cv2.VideoCapture(fname)
+if loop:
+    cap = cv2.VideoCapture(fname)
 c = 0 
 formcount = 1 #Number of Forms to Expect (can be set through gui)
 bodies = list() #Bodies Output
