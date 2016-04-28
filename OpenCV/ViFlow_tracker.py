@@ -321,6 +321,57 @@ def track():
     #     for bn in bodies:
     #         b.isInBoundingBox(bn,10)
 
+def colorFilter(src,lower,upper):
+     # Threshold the HSV image to get only blue colors
+    #Blur Kernel
+    kernel = np.ones((3,3),np.uint8)
+    imgMask = cv2.inRange(src, lower, upper)
+
+    #Mask Inversion Handler
+    if invert==1:
+        imgMask = 255 - imgMask;
+    else:
+        imgMask = imgMask
+    
+    #morphological opening (removes small objects from the foreground)
+    #Erode and Expand the edges of the mask to eliminate small artifacts
+    imgMask = cv2.erode(imgMask, kernel, iterations=2)
+    imgMask = cv2.dilate(imgMask, kernel, iterations=2)
+
+    return imgMask
+
+
+
+#Consts
+UDP_IP = "127.0.0.1"
+UDP_PORT = 5005
+KEY_I = 105
+KEY_C = 99
+KEY_ESC = 27
+WAIT = 1
+#Variables
+is_initialized = False
+cap = cv2.VideoCapture(0)
+fname = "02_100.MP4"
+flength = 100 # Length of video file in frames
+loop = False
+colorTracking = True#False #If colorTracking is true, then will use for color tracking, otherwise will use IR tradking
+if loop:
+    cap = cv2.VideoCapture(fname)
+c = 0 
+formcount = 1 #Number of Forms to Expect (can be set through gui)
+bodies = list() #Bodies Output
+run = True
+#GUI Defaults for IR tracking
+thresh_l = 45
+thresh_u = 255
+brightness = 36
+#GUI Defaults for Color Tracking
+h_l, h_u = 0, 255#0,55
+s_l, s_u = 0, 255
+v_l, v_u = 0, 255#20,255
+invert = 0
+
 ###GUI
 def set_scale_thresh_u(val):
     '''Sets Upperbound Threshold'''
@@ -354,38 +405,48 @@ def set_gui_exit(val):
         cv2.destroyAllWindows()
         sys.exit()
 
+def set_scale_h_u(val):
+    global h_u
+    h_u = val
+def set_scale_h_l(val):
+    global h_l
+    h_l = val
+def set_scale_s_u(val):
+    global s_u
+    s_u = val
+def set_scale_s_l(val):
+    global s_l
+    s_l = val
+def set_scale_v_u(val):
+    global v_u
+    v_u = val
+def set_scale_v_l(val):
+    global v_l
+    v_l = val
+
+def set_invert_mask(val):
+    global invert 
+    invert = val
+
 cv2.namedWindow('control panel', 0)
 cv2.createTrackbar('is_initilized', 'control panel', 0, 1 , set_gui_initialized)
 cv2.createTrackbar('formcount', 'control panel', 1, 9 , set_gui_formcount)
-cv2.createTrackbar('thresh_lower', 'control panel', 0, 255, set_scale_thresh_l)
-cv2.createTrackbar('thresh_upper', 'control panel', 255, 255, set_scale_thresh_u)
+if colorTracking:
+    print "color tracking mode"
+    cv2.createTrackbar('Hue_lower', 'control panel', 0, 255, set_scale_h_l)
+    cv2.createTrackbar('Hue_upper', 'control panel', 255, 255, set_scale_h_u)
+    cv2.createTrackbar('Sat_lower', 'control panel', 0, 255, set_scale_s_l)
+    cv2.createTrackbar('Sat_upper', 'control panel', 255, 255, set_scale_s_u)
+    cv2.createTrackbar('Val_lower', 'control panel', 0, 255, set_scale_v_l)
+    cv2.createTrackbar('Val_upper', 'control panel', 255, 255, set_scale_v_u)
+    cv2.createTrackbar('Invert Mask', 'control panel', 0, 1, set_invert_mask)
+else:
+    print "ir tracking mode"
+    cv2.createTrackbar('thresh_lower', 'control panel', 0, 255, set_scale_thresh_l)
+    cv2.createTrackbar('thresh_upper', 'control panel', 255, 255, set_scale_thresh_u)
 cv2.createTrackbar('src brightness', 'control panel', 36, 255 , set_scale_brightness)
 cv2.createTrackbar('Exit', 'control panel', 0, 1 , set_gui_exit)
 ### END GUI
-
-#Consts
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
-KEY_I = 105
-KEY_C = 99
-KEY_ESC = 27
-WAIT = 1
-#Variables
-is_initialized = False
-cap = cv2.VideoCapture(0)
-fname = "02_100.MP4"
-flength = 100 # Length of video file in frames
-loop = False
-if loop:
-    cap = cv2.VideoCapture(fname)
-c = 0 
-formcount = 1 #Number of Forms to Expect (can be set through gui)
-bodies = list() #Bodies Output
-run = True
-#GUI Defaults
-thresh_l = 45
-thresh_u = 255
-brightness = 36
 
 print "Setting up"
 print "UDP target IP:", UDP_IP
@@ -415,10 +476,16 @@ while(run):
     #print ret
 
     # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    if colorTracking:
+        lower = np.array([h_l,s_l,v_l]) 
+        upper = np.array([h_u,s_u,v_u])
 
-    gray = gray + brightness
-    ret,thresh = cv2.threshold(gray,thresh_l,thresh_u,cv2.THRESH_BINARY)
+        thresh = colorFilter(frame,lower,upper)
+    else:
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        gray = gray + brightness
+        ret,thresh = cv2.threshold(gray,thresh_l,thresh_u,cv2.THRESH_BINARY)
 
     if is_initialized:
         track()
