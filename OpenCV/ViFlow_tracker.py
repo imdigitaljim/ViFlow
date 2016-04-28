@@ -1,10 +1,8 @@
 #Live Performance Tracker
 # Tracks Sihlouettes and sends their motion data to Unity3d via UDP
-# Alpha 0.011
 #
 #Author: Taylor Brockhoeft
 #
-#branch: tracker_branch
 
 import sys
 sys.path.append('C:\OpenCV_2.4.9\opencv\sources\samples\python2')
