@@ -107,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126462832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.28, y: 0, z: 6.06}
+  m_LocalPosition: {x: 0, y: 0, z: 23.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3690,11 +3690,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649764444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.54, y: 2.77, z: 0}
+  m_LocalPosition: {x: 5.08, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1878073812}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &660982462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,7 +3832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &703091583
 Transform:
   m_ObjectHideFlags: 0
@@ -3969,7 +3969,7 @@ Transform:
   m_LocalScale: {x: 2, y: 7.76, z: 1}
   m_Children: []
   m_Father: {fileID: 1878073812}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!23 &854103122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7305,7 +7305,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1126245711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: -3.3, z: 18.3}
+  m_LocalPosition: {x: -3.63, y: -3.3, z: 18.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1591404384}
@@ -9420,8 +9420,8 @@ Transform:
   - {fileID: 1589427676}
   - {fileID: 2137755373}
   - {fileID: 332595423}
-  - {fileID: 649764445}
   - {fileID: 854103121}
+  - {fileID: 649764445}
   m_Father: {fileID: 1126245713}
   m_RootOrder: 8
 --- !u!114 &1878073813
@@ -9439,7 +9439,7 @@ MonoBehaviour:
   CurrentRange: 0
   CurrentDisplayEffect: {fileID: 0}
   TextureList:
-  - {fileID: 2800000, guid: 6224db41f432ab94ab896f59a5ff4b9f, type: 3}
+  - {fileID: 2800000, guid: f7b13b851fe33c747998067242735bef, type: 3}
   - {fileID: 2800000, guid: 39ee990a32046fa43988079c60ef3f3d, type: 3}
   - {fileID: 2800000, guid: 8030068e62d0d6e4bb6c320523bc43e4, type: 3}
   - {fileID: 2800000, guid: 854dcb3562f699c409f226b46e8cbbcb, type: 3}
@@ -9449,7 +9449,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c5b089f4c44083d41b5610e14a5f7716, type: 3}
   - {fileID: 2800000, guid: f7b13b851fe33c747998067242735bef, type: 3}
   PrefabToActivate:
-  - {fileID: 100000, guid: 1f7aa4d40edff6e48b549003cad031e1, type: 2}
+  - {fileID: 136258, guid: 6d99741e507dcad498511c41d36c73d0, type: 2}
   - {fileID: 135654, guid: 58b54854ca500684f84e0ef071469159, type: 2}
   - {fileID: 173234, guid: 71b6a616aca2b524fa7ff1abe076199e, type: 2}
   - {fileID: 199862, guid: b62509c81a7532249ad1c8f7a9d901d9, type: 2}

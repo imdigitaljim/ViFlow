@@ -82,9 +82,9 @@ public class MenuManager : MonoBehaviour
         {
             var p = transform.parent.transform.position;
             //var m = transform.position;
-            var e = Effect.transform.position;
+            //var e = Effect.transform.position;
             var objVector = PrefabToActivate[(x + CurrentRange)].transform.position;
-            var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + p + e, Quaternion.identity);
+            var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + p + Vector3.right, Quaternion.identity);
 			CurrentDisplayEffect = obj;
             obj.transform.parent = AttachedEffect.transform;
         }
