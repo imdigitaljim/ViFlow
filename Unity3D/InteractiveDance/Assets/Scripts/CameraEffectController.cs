@@ -34,27 +34,7 @@ public class CameraEffectController : MonoBehaviour
             _camera.is2D = !_camera.is2D;
         }
  
-        if (_ttl.start < GlobalTimer.RunningTime && FormController.bodies != null)
-        {
-            _current += Time.deltaTime;
-            if (_current > _update)
-            {
-                foreach (var form in FormController.bodies)
-                {
-                    if (form.IsFront && form.IsFrontMagnitude > ThresholdDistance + 2 && _camera.is2D)
-                    {
-                        _camera.is2D = false;
-                        form.Root.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(true);
-                    }
-                    else if (form.IsFront && form.IsFrontMagnitude < ThresholdDistance - 2)
-                    {
-                        _camera.is2D = true;
-                        form.Root.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(false);
-                    }
-                }
-                _current = 0;
-            }
-        }
+      
     }
 
 }

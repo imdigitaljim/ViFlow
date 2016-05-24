@@ -1,217 +1,116 @@
-﻿//SocketClient Version 0.2
-//Takes data via UDP and displays it acordingly.
-
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using MsgPack.Serialization;
+using UnityEngine.Networking;
+using Debug = UnityEngine.Debug;
 
 public class FormController : MonoBehaviour {
 
     //object info
-    public Vector3 offset; //-27.2, 6.2, 30
-    public float handOffset;
-    public float div = 10.0f;
-    public static Form[] bodies;
-    private int bodycount;
+    public GameObject BodyPrefab;
 
-    public GameObject dancePrefab;
-    //connection info
-    private Thread receiveThread;
-    private UdpClient client;
-    public int port = 5005;
+    //connection info 
+    private static readonly IPEndPoint IpEndPoint = new IPEndPoint(IPAddress.Any, 9050);
+    private static IPEndPoint _sender = new IPEndPoint(IPAddress.Any, 0);
+    private static readonly UdpClient Server = new UdpClient(IpEndPoint);
+    private byte[] _data;
 
-    //debug info
-    private string lastReceivedUDPPacket;
-    private List<string> allReceivedUDPPackets;
-    private IPEndPoint anyIP;
-    private float currentNoUpdateTime = 0;
-    public float maxTimeWithoutUpdate = 3;
-    private EffectGenerator _effectGen;
+    public static SimpleFrame Bodies = new SimpleFrame();
+    public float Modifier;
+    public Vector2 minThreshold;
     void Start()
     {
-        Debug.Log(string.Format(@"Sending to 127.0.0.1 : {0}", port));
-        client = new UdpClient(port);
-        anyIP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
-        allReceivedUDPPackets = new List<string>();
-        //_effectGen = GameObject.Find("MasterControl").GetComponent<EffectGenerator>(); //production system component
+        _data = new byte[65535];
+        _data = Server.Receive(ref _sender);
+        Debug.Log(Encoding.ASCII.GetString(_data, 0, _data.Length));
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateFormData();
+        ReceiveUpdates();
+        UpdatePositions();
     }
 
-    private void UpdateFormData()
+    void ReceiveUpdates()
     {
-        //rewrite to serialize and deserialize packets.
-        try
+        if (Server.Available > 0)
         {
-            if (client.Available > 0)
+            _data = Server.Receive(ref _sender);
+
+            var serializer = MessagePackSerializer.Get<SimpleFrame>();
+            using (var stream = new MemoryStream(_data))
             {
-                currentNoUpdateTime = 0;
-                var msg = Encoding.UTF8.GetString(client.Receive(ref anyIP));
-                lastReceivedUDPPacket = msg;
-                allReceivedUDPPackets.Add(msg);
-                var words = msg.Split(',');
-                switch (words[0])
-                {
-                    case "SET":
-                        bodycount = int.Parse(words[2]);
-                        Debug.Log("New Set Called");
-                        SetNewForms();
-                        break;
-                    case "DATA":
-                        UpdateForms(int.Parse(words[1]), words);
-                        break;
-                    default:
-                        Debug.Log("UNKNOWN UDP MESSAGE");
-                        break;
-                }
-                var front = 9999f;
-                var second = 9999f;
-                var frontIndex = -1;
-                var secondIndex = -1;
-                for (var i = 0; i < bodies.Length; i++)
-                {
-                    bodies[i].UpdatePositions();
-                    bodies[i].IsFrontMagnitude = bodies[i].RootVector.z;
-                    if (frontIndex == -1)
-                    {
-                        front = bodies[i].IsFrontMagnitude;
-                        frontIndex = i;
-                    }
-                    else if (front > bodies[i].IsFrontMagnitude)
-                    {
-                        if (secondIndex == -1)
-                        {
-                            second = front;
-                            secondIndex = frontIndex;
-                        }
-                        front = bodies[i].IsFrontMagnitude;
-                        frontIndex = i;
-                    }
-                    else if (secondIndex == -1 || second > bodies[i].IsFrontMagnitude)
-                    {
-                        second = bodies[i].IsFrontMagnitude;
-                        secondIndex = i;
-                    }
-                }
-                for (var i = 0; i < bodies.Length; i++)
-                {
-                    if (i == frontIndex)
-                    {
-                        bodies[i].IsFront = true;
-                        bodies[i].IsFrontMagnitude = second - front;
-                        Debug.Log(string.Format("{0} is in front by {1}", i, bodies[i].IsFrontMagnitude));
-                    }
-                    else
-                    {
-                        bodies[i].IsFront = false;
-                        bodies[i].IsFrontMagnitude = 0;
-                    }
-                        
-                }
-            }
-            else if (bodies != null && currentNoUpdateTime < maxTimeWithoutUpdate)
-            {
-                currentNoUpdateTime += Time.deltaTime;
-                var front = 9999f;
-                var second = 9999f;
-                var frontIndex = -1;
-                var secondIndex = -1;
-                for (var i = 0; i < bodies.Length; i++)
-                {
-                    bodies[i].IsFrontMagnitude = bodies[i].Root.transform.position.z;
-                    if (frontIndex == -1)
-                    {
-                        front = bodies[i].IsFrontMagnitude;
-                        frontIndex = i;
-                    }
-                    else if (front > bodies[i].IsFrontMagnitude)
-                    {
-                        if (secondIndex == -1)
-                        {
-                            second = front;
-                            secondIndex = frontIndex;
-                        }
-                        front = bodies[i].IsFrontMagnitude;
-                        frontIndex = i;
-                    }
-                    else if (secondIndex == -1 || second > bodies[i].IsFrontMagnitude)
-                    {
-                        second = bodies[i].IsFrontMagnitude;
-                        secondIndex = i;
-                    }
-                }
-                for (var i = 0; i < bodies.Length; i++)
-                {
-                    if (i == frontIndex)
-                    {
-                        bodies[i].IsFront = true;
-                        bodies[i].IsFrontMagnitude = second - front;
-                    }
-                    else
-                    {
-                        bodies[i].IsFront = false;
-                        bodies[i].IsFrontMagnitude = 0;
-                    }
-                }
-            }
-            else
-            {
-                bodycount = 0;
-                for (var i = 0; i < transform.childCount; i++)
-                {
-                    Destroy(transform.GetChild(i).gameObject);
-                }
+                Bodies = serializer.Unpack(stream);
             }
 
         }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.ToString());
+    }
+
+    void UpdatePositions()
+    {
+        foreach (var body in Bodies.Data)
+        {          
+            var isFound = false;
+            foreach (Transform child in transform)
+            {
+                var bodyManager = child.gameObject.GetComponent<BodyManager>();
+                if (bodyManager.Id == body.Key)
+                {                   
+                    isFound = true;
+                    SetBody(child.gameObject, body.Key);
+                }
+            }
+            if (!isFound)
+            {
+                var obj = Instantiate(BodyPrefab);
+                obj.transform.parent = gameObject.transform;
+                obj.GetComponent<BodyManager>().Id = body.Key;
+                SetBody(obj, body.Key);
+            }
+
         }
     }
 
-    private void SetNewForms()
+    void SetBody(GameObject body, ulong id)
     {
-        Debug.Log(bodycount);
-        for (var i = 0; i < transform.childCount; i++)
+        foreach (Transform child in body.transform)
         {
-            Destroy(transform.GetChild(i).gameObject);
-        }
-        bodies = new Form[bodycount];
-        for (var i = 0; i < bodies.Length; i++)
-        {
-            bodies[i] = new Form();
-            bodies[i].Root = (GameObject) Instantiate(dancePrefab, Vector3.zero, Quaternion.identity);
-            bodies[i].RightHand = bodies[i].Root.transform.GetChild(0).gameObject;
-            bodies[i].LeftHand = bodies[i].Root.transform.GetChild(1).gameObject;
-            bodies[i].Root.transform.parent = transform;
-            //_effectGen.SetCurrentEffect(bodies[i]);
+            foreach (var joint in Bodies.Data[id].Joints)
+            {
+                body.transform.GetChild((int)joint.Type).position = joint.Point;
+
+                //var test = joint.Point - minThreshold;
+                //if (test.x > 0 && test.y > 0)
+                //{
+                //    body.SetActive(true);
+                    
+                //    //Debug.Log(joint.Point);
+                //}
+                //else
+                //{
+                //    body.SetActive(false);
+                //}
+
+
+             
+            }
         }
     }
-    private void UpdateForms(int id, IList<string> msg)
-    {
-        if (id + 1 > bodycount)
-        {
-            bodycount = id + 1;
-            SetNewForms();
-        }
-        bodies[id].id = id;
-        // 0 = Message Type; 1 = id; 2,3 = xy root; 4,5 = xy leftmost; 6,7 = xy rightmost; 8 = self.radius; 9 = self.velocity
-        bodies[id].RootVector = new Vector3(float.Parse(msg[2])/div, 0, (-float.Parse(msg[3]))/(div * 2)) + offset;
-        bodies[id].LeftHandVector = new Vector3(float.Parse(msg[4]) / div + handOffset, 0, (-float.Parse(msg[5])) / (div * 2)) + offset - bodies[id].RootVector;
-        bodies[id].RightHandVector = new Vector3(float.Parse(msg[6]) / div - handOffset, 0, (-float.Parse(msg[7])) / (div * 2)) + offset - bodies[id].RootVector;
-        bodies[id].Radius = float.Parse(msg[8]);
-        bodies[id].Velocity = float.Parse(msg[9]);
-    }
+
+
+
+
 
 
 }

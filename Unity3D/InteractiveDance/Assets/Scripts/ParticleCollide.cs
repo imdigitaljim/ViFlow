@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
-using UnityEditor;
 using Debug = UnityEngine.Debug;
 
 public class ParticleCollide : MonoBehaviour {
@@ -18,7 +17,6 @@ public class ParticleCollide : MonoBehaviour {
 
     void OnParticleCollision(GameObject c)
     {
-
         if (c.tag == "InteractiveParticles")
         {
             var em = c.GetComponent<ParticleSystem>().emission;

@@ -64,14 +64,13 @@ public class EffectGenerator : MonoBehaviour
                 EffectList[i].GObject.SetActive(true);
                 if (e.IsAttached)
                 {
-                    if (FormController.bodies == null) break;
-                    foreach (var dancer in FormController.bodies)
-                    { 
-
-                        SetCurrentEffect(dancer);
-                    }
-                    _pec.CheckEffects();
-                    _pec.UpdateSpeed();
+                    //if (FormController.bodies == null) break;
+                    //foreach (var dancer in FormController.bodies)
+                    //{ 
+                    //    SetCurrentEffect(dancer);
+                    //}
+                    //_pec.CheckEffects();
+                    //_pec.UpdateSpeed();
                 }
 
             }
