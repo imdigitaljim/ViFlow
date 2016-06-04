@@ -237,6 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0ecd25879606b4fb1e0f6a198a785d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodyPrefab: {fileID: 179876, guid: 9f099a4e78a0d784d8e02fda9de7699a, type: 2}
+  BodyPrefab: {fileID: 179876, guid: e8d5e512b3df425429ac8153d5820ec0, type: 2}
   Modifier: 1
   minThreshold: {x: 0.2, y: 0.2}

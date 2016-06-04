@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using DigitalRuby.PyroParticles;
 
 public class BodyManager : MonoBehaviour
 {
