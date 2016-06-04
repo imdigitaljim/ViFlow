@@ -21,27 +21,24 @@ public class ColorController : MonoBehaviour {
 	
 	}
 
-    public void SetColors()
+    public void SetColors(int childId)
     {
-        var r = new System.Random();
-        var howMany = r.Next(0, _colorQuads.Count);
-        var whichOnes = new List<int>();
-        for (var i = 0; i < howMany; i++)
-        {
-            while (true)
-            {
-                var thisOne = r.Next(0, _colorQuads.Count);
-                if (!whichOnes.Contains(thisOne))
-                {
-                    whichOnes.Add(thisOne);
-                    break;
-                }
-            }
-        }
-        foreach (var obj in whichOnes)
-        {
-            var newColor = new Color(Random.value, Random.value, Random.value, 1.0f);
-            _colorQuads[obj].GetComponent<Renderer>().material.color = newColor;
-        }
+        //var r = new System.Random();
+        //var howMany = r.Next(0, _colorQuads.Count);
+        //var whichOnes = new List<int>();
+        //for (var i = 0; i < howMany; i++)
+        //{
+        //    while (true)
+        //    {
+        //        var thisOne = r.Next(0, _colorQuads.Count);
+        //        if (!whichOnes.Contains(thisOne))
+        //        {
+        //            whichOnes.Add(thisOne);
+        //            break;
+        //        }
+        //    }
+        //}
+        var newColor = new Color(Random.value, Random.value, Random.value, 1.0f);       
+        _colorQuads[childId].GetComponent<Renderer>().material.color = newColor;
     }
 }

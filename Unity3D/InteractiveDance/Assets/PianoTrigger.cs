@@ -5,6 +5,7 @@ public class PianoTrigger : MonoBehaviour {
 
 	// Use this for initialization
     private GameObject _parent;
+    public int Id;
 	void Start ()
 	{
 	    _parent = transform.parent.gameObject;
@@ -17,6 +18,7 @@ public class PianoTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        _parent.GetComponent<PianoCollisionController>().SetColors();
+        if (c.)
+        _parent.GetComponent<PianoCollisionController>().SetColors(Id);
     }
 }

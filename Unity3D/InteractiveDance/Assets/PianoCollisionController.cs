@@ -8,6 +8,11 @@ public class PianoCollisionController : MonoBehaviour {
 	void Start ()
 	{
 	    _colorControl = transform.parent.GetChild(1).gameObject;
+	    var count = 0;
+	    foreach (Transform child in transform)
+	    {
+	        child.gameObject.GetComponent<PianoTrigger>().Id = count++;
+	    }
 	}
 	
 	// Update is called once per frame
@@ -15,8 +20,8 @@ public class PianoCollisionController : MonoBehaviour {
 	
 	}
 
-    public void SetColors()
+    public void SetColors(int childId)
     {
-        _colorControl.GetComponent<ColorController>().SetColors();
+        _colorControl.GetComponent<ColorController>().SetColors(childId);
     }
 }
