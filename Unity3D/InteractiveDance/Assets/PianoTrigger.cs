@@ -18,7 +18,6 @@ public class PianoTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        if (c.)
         _parent.GetComponent<PianoCollisionController>().SetColors(Id);
     }
 }

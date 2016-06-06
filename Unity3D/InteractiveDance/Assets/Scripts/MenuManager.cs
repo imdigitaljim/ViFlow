@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 
@@ -12,10 +13,11 @@ public class MenuManager : MonoBehaviour
     public int CurrentRange = 0;
 
 	public GameObject CurrentDisplayEffect;
-    private GameObject Effect, AttachedEffect;
+    private GameObject Effect, _attachedEffectLeft, _attachedEffectRight, _attachedEffectBody;
     public Texture[] TextureList = new Texture[TextureCount];
     public GameObject[] PrefabToActivate = new GameObject[TextureCount];
     public bool[] IsAttached = new bool[TextureCount];
+    public bool[] HandEffect = new bool[TextureCount];
     private GameObject[] _options = new GameObject[OptionMax]; //this is the list of objections
     
 
@@ -26,9 +28,8 @@ public class MenuManager : MonoBehaviour
     void Start ()
 	{
 	    Effect = GameObject.Find("ActiveEffect");
-        AttachedEffect = gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject;
         for (var i = 0; i < OptionMax; i++)
-	    {
+        {
             _options[i] = transform.GetChild(i).gameObject;
 	        _options[i].transform.GetChild(0).gameObject.GetComponent<OptionSelector>().id = i;
 	    }
@@ -58,21 +59,32 @@ public class MenuManager : MonoBehaviour
 
     public void ActivateElement(int x)
     {
-		try
+        _attachedEffectLeft = GameObject.Find("AttachedEffectLeft");
+        _attachedEffectRight = GameObject.Find("AttachedEffectRight");
+        _attachedEffectBody = GameObject.Find("AttachedEffectBody");
+        try
 		{
         	Debug.Log((x + CurrentRange) + " is activated");
         	foreach (Transform child in Effect.transform)
         	{
         	    Destroy(child.gameObject);
         	}
-        	foreach (Transform child in AttachedEffect.transform)
+        	foreach (Transform child in _attachedEffectLeft.transform)
     	    {
 			    Destroy(child.gameObject);
         	}
-		}
+		    foreach (Transform child in _attachedEffectRight.transform)
+		    {
+		        Destroy(child.gameObject);
+		    }
+            foreach (Transform child in _attachedEffectBody.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
 		catch (System.Exception e)
 		{
-			print(e.ToString());
+			Debug.Log(e.ToString());
 		}
 
 
@@ -80,13 +92,35 @@ public class MenuManager : MonoBehaviour
 
         if (IsAttached[x + CurrentRange])
         {
-            var p = transform.parent.transform.position;
-            //var m = transform.position;
-            //var e = Effect.transform.position;
-            var objVector = PrefabToActivate[(x + CurrentRange)].transform.position;
-            var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + p + Vector3.right, Quaternion.identity);
-			CurrentDisplayEffect = obj;
-            obj.transform.parent = AttachedEffect.transform;
+            try
+            {
+                var objVector = PrefabToActivate[(x + CurrentRange)].transform.position;
+                if (HandEffect[x + CurrentRange])
+                {
+                    _attachedEffectLeft = GameObject.Find("AttachedEffectLeft");
+                    _attachedEffectRight = GameObject.Find("AttachedEffectRight");
+                    var leftPos = _attachedEffectLeft.transform.parent.transform.position;
+                    var rightPos = _attachedEffectRight.transform.parent.transform.position;
+                    var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + leftPos + Vector3.right, Quaternion.identity);
+                    var obj2 = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + rightPos + Vector3.right, Quaternion.identity);
+
+                    obj.transform.parent = _attachedEffectLeft.transform;
+                    obj2.transform.parent = _attachedEffectRight.transform;
+                }
+                else
+                {
+                    var p = transform.parent.transform.position;
+                    _attachedEffectBody = GameObject.Find("AttachedEffectBody");
+                    var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + p + Vector3.right, Quaternion.identity);
+                    CurrentDisplayEffect = obj;
+                    obj.transform.parent = _attachedEffectBody.transform;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.ToString());
+            }
         }
         else
         {

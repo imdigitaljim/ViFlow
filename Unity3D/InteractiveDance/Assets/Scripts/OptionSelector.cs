@@ -28,6 +28,7 @@ public class OptionSelector : MonoBehaviour {
                 _current += Time.deltaTime;
                 if (_current > _menuManager.TimeToActivate)
                 {
+                    Debug.Log("activating");
                     _menuManager.ActivateElement(id);
                     _isActivated = true;
                 }

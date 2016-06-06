@@ -15,7 +15,7 @@ GameObject:
   - 54: {fileID: 5471754}
   m_Layer: 8
   m_Name: Sphere (8)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ GameObject:
   - 54: {fileID: 5449030}
   m_Layer: 8
   m_Name: Sphere (11)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - 54: {fileID: 5446032}
   m_Layer: 8
   m_Name: Sphere (15)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - 54: {fileID: 5489088}
   m_Layer: 8
   m_Name: Sphere (24)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,22 @@ GameObject:
   - 54: {fileID: 5481670}
   m_Layer: 8
   m_Name: Sphere (2)
-  m_TagString: Dancer
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &140782
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401352}
+  m_Layer: 8
+  m_Name: AttachedEffectLeft
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +130,7 @@ GameObject:
   - 54: {fileID: 5454424}
   m_Layer: 8
   m_Name: Sphere (1)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +150,7 @@ GameObject:
   - 54: {fileID: 5423032}
   m_Layer: 8
   m_Name: Sphere (3)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +170,7 @@ GameObject:
   - 54: {fileID: 5400418}
   m_Layer: 8
   m_Name: Sphere (14)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +190,7 @@ GameObject:
   - 54: {fileID: 5439904}
   m_Layer: 8
   m_Name: Sphere (19)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +210,7 @@ GameObject:
   - 54: {fileID: 5471024}
   m_Layer: 8
   m_Name: Sphere (10)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +230,7 @@ GameObject:
   - 54: {fileID: 5432342}
   m_Layer: 8
   m_Name: Sphere (9)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +250,7 @@ GameObject:
   - 54: {fileID: 5427404}
   m_Layer: 8
   m_Name: Sphere (17)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,11 +270,26 @@ GameObject:
   - 54: {fileID: 5403748}
   m_Layer: 8
   m_Name: Sphere (13)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &176124
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 413204}
+  m_Layer: 8
+  m_Name: AttachedEffectRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &178926
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +305,7 @@ GameObject:
   - 54: {fileID: 5437860}
   m_Layer: 8
   m_Name: Sphere (7)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,7 +325,7 @@ GameObject:
   - 54: {fileID: 5484804}
   m_Layer: 8
   m_Name: Sphere (4)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,7 +345,7 @@ GameObject:
   - 54: {fileID: 5465900}
   m_Layer: 8
   m_Name: Sphere (23)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +381,7 @@ GameObject:
   - 54: {fileID: 5410046}
   m_Layer: 8
   m_Name: Sphere (21)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,7 +401,7 @@ GameObject:
   - 54: {fileID: 5454362}
   m_Layer: 8
   m_Name: Sphere (22)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,11 +421,11 @@ GameObject:
   - 54: {fileID: 5475936}
   m_Layer: 8
   m_Name: Sphere
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &183414
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,11 +441,26 @@ GameObject:
   - 54: {fileID: 5440398}
   m_Layer: 8
   m_Name: Sphere (5)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &184250
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 450830}
+  m_Layer: 8
+  m_Name: AttachedEffectBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &185898
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +476,7 @@ GameObject:
   - 54: {fileID: 5432518}
   m_Layer: 8
   m_Name: Sphere (6)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,7 +496,7 @@ GameObject:
   - 54: {fileID: 5419176}
   m_Layer: 8
   m_Name: Sphere (20)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -471,7 +516,7 @@ GameObject:
   - 54: {fileID: 5431892}
   m_Layer: 8
   m_Name: Sphere (16)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +536,7 @@ GameObject:
   - 54: {fileID: 5458502}
   m_Layer: 8
   m_Name: Sphere (12)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -511,7 +556,7 @@ GameObject:
   - 54: {fileID: 5414728}
   m_Layer: 8
   m_Name: Sphere (18)
-  m_TagString: Dancer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -540,6 +585,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 434228}
   m_RootOrder: 15
+--- !u!4 &401352
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491194}
+  m_RootOrder: 0
 --- !u!4 &407898
 Transform:
   m_ObjectHideFlags: 1
@@ -564,6 +621,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 434228}
   m_RootOrder: 13
+--- !u!4 &413204
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 456322}
+  m_RootOrder: 0
 --- !u!4 &415244
 Transform:
   m_ObjectHideFlags: 1
@@ -685,6 +754,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 434228}
   m_RootOrder: 8
+--- !u!4 &450830
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 490584}
+  m_RootOrder: 0
 --- !u!4 &456322
 Transform:
   m_ObjectHideFlags: 1
@@ -694,7 +775,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.34, y: 0, z: 4.0199995}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 413204}
   m_Father: {fileID: 434228}
   m_RootOrder: 11
 --- !u!4 &457090
@@ -802,7 +884,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.34, y: 0, z: 4.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 450830}
   m_Father: {fileID: 434228}
   m_RootOrder: 0
 --- !u!4 &491194
@@ -814,7 +897,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.34, y: 0, z: 4.0199995}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 401352}
   m_Father: {fileID: 434228}
   m_RootOrder: 7
 --- !u!4 &492354
