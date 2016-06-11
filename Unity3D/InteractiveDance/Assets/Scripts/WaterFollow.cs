@@ -6,7 +6,7 @@ public class WaterFollow : MonoBehaviour {
     private int x;
     private int z;
     private bool isActive = false;
-    private float hangTime = 5f;
+    private float hangTime = 2f;
     private float current = 0;
     Transform o;
     // Use this for initialization
@@ -25,7 +25,6 @@ public class WaterFollow : MonoBehaviour {
     {
         if ((int)o.position.x != x)
         {
-            Debug.Log("changing!");
             ToggleVisible();
             isActive = true;
             current = 0;

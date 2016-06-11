@@ -32,16 +32,16 @@ public class MenuEffectGestureControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (_menuManager.CurrentDisplayEffect != null) 
-		{
-			currentEffectOnDisplay = _menuManager.CurrentDisplayEffect;
-			playerTransform = thePlayer.transform;
-			effectTransform = currentEffectOnDisplay.transform;
-			//currentEffectOnDisplay.transform.position = new Vector3 (_playerLeftHand.transform.position.x, effectPosition.y, effectPosition.z);
+        if (MenuManager.CurrentDisplayEffect == null) return; 
+		
+		currentEffectOnDisplay = MenuManager.CurrentDisplayEffect;
+		playerTransform = thePlayer.transform;
+		effectTransform = currentEffectOnDisplay.transform;
+		//currentEffectOnDisplay.transform.position = new Vector3 (_playerLeftHand.transform.position.x, effectPosition.y, effectPosition.z);
 
 
-			currentEffectOnDisplay.transform.localScale = new Vector3 (Mathf.Abs (_playerLeftHand.transform.position.x - _playerRightHand.transform.position.x) * xScaleFactor, Mathf.Abs (_playerLeftHand.transform.position.y - _playerRightHand.transform.position.y) * xScaleFactor, effectTransform.localScale.z);
-		}
+		currentEffectOnDisplay.transform.localScale = new Vector3 (Mathf.Abs (_playerLeftHand.transform.position.x - _playerRightHand.transform.position.x) * xScaleFactor, Mathf.Abs (_playerLeftHand.transform.position.y - _playerRightHand.transform.position.y) * xScaleFactor, effectTransform.localScale.z);
+		
 		//Debug.Log ("Menu gestures");
 
     }

@@ -12,7 +12,8 @@ public class MenuManager : MonoBehaviour
     public readonly int TimeToActivate = 1;
     public int CurrentRange = 0;
 
-	public GameObject CurrentDisplayEffect;
+	public static GameObject CurrentDisplayEffect;
+    public static int CurrentDisplayIndex;
     private GameObject Effect, _attachedEffectLeft, _attachedEffectRight, _attachedEffectBody;
     public Texture[] TextureList = new Texture[TextureCount];
     public GameObject[] PrefabToActivate = new GameObject[TextureCount];
@@ -109,10 +110,12 @@ public class MenuManager : MonoBehaviour
                 }
                 else
                 {
-                    var p = transform.parent.transform.position;
+
                     _attachedEffectBody = GameObject.Find("AttachedEffectBody");
+                    var p = _attachedEffectBody.transform.parent.transform.position;
                     var obj = (GameObject)Instantiate(PrefabToActivate[(x + CurrentRange)], objVector + p + Vector3.right, Quaternion.identity);
                     CurrentDisplayEffect = obj;
+                    CurrentDisplayIndex = x + CurrentRange;
                     obj.transform.parent = _attachedEffectBody.transform;
                 }
 
@@ -126,6 +129,7 @@ public class MenuManager : MonoBehaviour
         {
             var obj = Instantiate(PrefabToActivate[(x + CurrentRange)]);
 			CurrentDisplayEffect = obj;
+            CurrentDisplayIndex = x + CurrentRange;
             obj.transform.parent = Effect.transform;
         }
 

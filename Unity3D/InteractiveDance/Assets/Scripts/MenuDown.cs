@@ -43,10 +43,10 @@ public class MenuDown : MonoBehaviour {
             if (Mathf.Abs(exitY - activatedY) > thresholdY - 1)
             {
                 var movingUp = exitY - activatedY > 0;
-                Debug.Log("Moving!");
+                //Debug.Log("Moving!");
                 if (movingUp)
                 {
-                    Debug.Log("Up!");
+                    //Debug.Log("Up!");
                     var temp = (_menuManager.CurrentRange - 3);
                     if (temp < 0)
                     {
@@ -56,7 +56,7 @@ public class MenuDown : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Down!");
+                    //Debug.Log("Down!");
                     _menuManager.CurrentRange = (_menuManager.CurrentRange + 3) % MenuManager.TextureCount;
                 }
             }

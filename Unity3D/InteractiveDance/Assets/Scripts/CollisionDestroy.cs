@@ -4,31 +4,31 @@ using System.Collections;
 public class CollisionDestroy : MonoBehaviour {
 
 
-    private Transform xform;
-    private bool isDestroyed = false;
-    public float hangtime;
-    public float speed;
-    public float shrink;
-    private float currentTime = 0;
+
+    private bool _isDestroyed;
+    public float Hangtime;
+    public float Speed;
+    public float ShrinkRate;
+    private float _currentTime;
 	// Use this for initialization
 	void Start () {
-        xform = gameObject.transform;
+ 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (isDestroyed)
+        if (_isDestroyed)
         {
-            if (currentTime >= hangtime)
+            if (_currentTime >= Hangtime)
             {
                 Destroy(gameObject);
             }
-            xform.localScale = new Vector3(xform.localScale.x - shrink, xform.localScale.y - shrink, xform.localScale.z - shrink);
-            xform.position = new Vector3(xform.position.x, xform.position.y + speed, xform.position.z);
-            currentTime += Time.deltaTime;
+            transform.localScale = new Vector3(transform.localScale.x - ShrinkRate, transform.localScale.y - ShrinkRate, transform.localScale.z - ShrinkRate);
+            transform.position = new Vector3(transform.position.x, transform.position.y + Speed, transform.position.z);
+            _currentTime += Time.deltaTime;
         }
-        xform.position = new Vector3(xform.position.x, xform.position.y, xform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
 
@@ -36,7 +36,7 @@ public class CollisionDestroy : MonoBehaviour {
     {
         if (c.gameObject.tag == "Player")
         {
-            isDestroyed = true;
+            _isDestroyed = true;
         }
     }
 
