@@ -14,7 +14,7 @@ using MsgPack.Serialization;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 
-public class FormController : MonoBehaviour {
+public class BodyController : MonoBehaviour {
 
     //object info
     public GameObject BodyPrefab;

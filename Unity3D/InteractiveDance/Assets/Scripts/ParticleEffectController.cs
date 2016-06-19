@@ -50,8 +50,8 @@ public class ParticleEffectController : MonoBehaviour
 
     //public void UpdateLoop()
     //{
-    //    if (FormController.bodies == null) return;
-    //    foreach (var dancer in FormController.bodies)
+    //    if (BodyController.bodies == null) return;
+    //    foreach (var dancer in BodyController.bodies)
     //    {
     //        var activeEffects = dancer.Root.transform.GetChild(2).gameObject.transform;
     //        var effect = activeEffects.GetChild(0).gameObject;
@@ -78,8 +78,8 @@ public class ParticleEffectController : MonoBehaviour
 
     //public void UpdateSpeed()
     //{
-    //    if (FormController.bodies == null) return;
-    //    foreach (var dancer in FormController.bodies)
+    //    if (BodyController.bodies == null) return;
+    //    foreach (var dancer in BodyController.bodies)
     //    {
     //        var activeEffects = dancer.Root.transform.GetChild(2).transform;
     //        for (var i = 0; i < activeEffects.childCount; i++)
@@ -96,8 +96,8 @@ public class ParticleEffectController : MonoBehaviour
 
     //public void CheckEffects()
     //{
-    //    if (FormController.bodies == null) return;
-    //    foreach (var dancer in FormController.bodies)
+    //    if (BodyController.bodies == null) return;
+    //    foreach (var dancer in BodyController.bodies)
     //    {
     //        var activeEffects = dancer.Root.transform.GetChild(2).gameObject.transform;
     //        for (var i = 0; i < activeEffects.childCount; i++)

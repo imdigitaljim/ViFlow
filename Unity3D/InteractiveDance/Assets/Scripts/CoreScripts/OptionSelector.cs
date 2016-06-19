@@ -21,29 +21,19 @@ public class OptionSelector : MonoBehaviour {
 
     void OnTriggerStay(Collider c)
     {
-        if (c.gameObject.tag == "Player")
-        {
-            if (!_isActivated)
-            {
-                _current += Time.deltaTime;
-                if (_current > _menuManager.TimeToActivate)
-                {
-                    Debug.Log("activating");
-                    _menuManager.ActivateElement(id);
-                    _isActivated = true;
-                }
-            }
-
-        }
-
+        if (c.gameObject.tag != "Player") return;    
+        if (_isActivated) return;
+        _current += Time.deltaTime;
+        if (_current < _menuManager.TimeToActivate) return;
+        _menuManager.ActivateElement(id);
+        _isActivated = true;
     }
 
     void OnTriggerExit(Collider c)
     {
-        if (c.gameObject.tag == "Player")
-        {
-            _current = 0;
-            _isActivated = false;
-        }
+        if (c.gameObject.tag != "Player") return;      
+        _current = 0;
+        _isActivated = false;
+        
     }
 }

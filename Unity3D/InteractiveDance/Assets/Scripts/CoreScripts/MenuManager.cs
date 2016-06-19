@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     public GameObject[] PrefabToActivate = new GameObject[TextureCount];
     public bool[] IsAttached = new bool[TextureCount];
     public bool[] HandEffect = new bool[TextureCount];
-    private GameObject[] _options = new GameObject[OptionMax]; //this is the list of objections
+    private readonly GameObject[] _options = new GameObject[OptionMax]; //this is the list of objections
     
 
     private int _newRange = 0;
@@ -47,11 +47,11 @@ public class MenuManager : MonoBehaviour
             }
             _hasChanged = false;
 	    }
-	    if (_newRange != CurrentRange)
-	    {
-	        _hasChanged = true;
-            _newRange = CurrentRange;
-	    }
+	    if (_newRange == CurrentRange)
+	    
+	    _hasChanged = true;
+        _newRange = CurrentRange;
+	    
 
 		//Debug.Log("effect Gestures");
 
@@ -65,7 +65,6 @@ public class MenuManager : MonoBehaviour
         _attachedEffectBody = GameObject.Find("AttachedEffectBody");
         try
 		{
-        	Debug.Log((x + CurrentRange) + " is activated");
         	foreach (Transform child in Effect.transform)
         	{
         	    Destroy(child.gameObject);

@@ -24,6 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 454462}
+  - 114: {fileID: 11455482}
   m_Layer: 0
   m_Name: SandWaterFallCollection
   m_TagString: Untagged
@@ -116,6 +117,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 454462}
   m_RootOrder: 0
+--- !u!114 &11455482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f81dab645f85d34f887d13afb474aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSize: 0
+  StartLocation: 0
 --- !u!136 &13607990
 CapsuleCollider:
   m_ObjectHideFlags: 1

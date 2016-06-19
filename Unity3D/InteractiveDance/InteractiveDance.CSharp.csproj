@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -183,47 +185,57 @@
     <Compile Include="Assets\ImportLibraries\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
     <Compile Include="Assets\ImportLibraries\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
     <Compile Include="Assets\ImportLibraries\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
-    <Compile Include="Assets\Scripts\BodyManager.cs" />
-    <Compile Include="Assets\Scripts\BouncyBall.cs" />
-    <Compile Include="Assets\Scripts\CollisionDestroy.cs" />
-    <Compile Include="Assets\Scripts\ColorController.cs" />
-    <Compile Include="Assets\Scripts\CrackEffect.cs" />
-    <Compile Include="Assets\Scripts\FormController.cs" />
-    <Compile Include="Assets\Scripts\GestureActivation.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\BodyController.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\BodyManager.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\GestureActivation.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\GestureManager.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\IGesturable.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\JointInfo.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\MenuTransitionGesture.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\OptionSelector.cs" />
+    <Compile Include="Assets\Scripts\CoreScripts\SimpleFrame.cs" />
+    <Compile Include="Assets\Scripts\EffectSpecific\BouncyBall.cs" />
+    <Compile Include="Assets\Scripts\EffectSpecific\ColorController.cs" />
+    <Compile Include="Assets\Scripts\EffectSpecific\PianoCollisionController.cs" />
+    <Compile Include="Assets\Scripts\EffectSpecific\PianoTrigger.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\ColorPiano.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\Exploding.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\GestureParameter.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\GravityBall.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\HandColors.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\HandFire.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\PixelBlocks.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\RainFog.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\SandWaterfall.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\SnowWaterFall.cs" />
     <Compile Include="Assets\Scripts\Identifier.cs" />
-    <Compile Include="Assets\Scripts\JointInfo.cs" />
-    <Compile Include="Assets\Scripts\MenuDown.cs" />
-    <Compile Include="Assets\Scripts\MenuEffectGestureControl.cs" />
-    <Compile Include="Assets\Scripts\MenuManager.cs" />
-    <Compile Include="Assets\Scripts\MenuUp.cs" />
-    <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\ObjectKiller.cs" />
     <Compile Include="Assets\Scripts\OldScripts\ArrowPoint.cs" />
     <Compile Include="Assets\Scripts\OldScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\OldScripts\CameraEffectController.cs" />
     <Compile Include="Assets\Scripts\OldScripts\CharacterController.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\CollisionDestroy.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\CrackEffect.cs" />
     <Compile Include="Assets\Scripts\OldScripts\Cubes.cs" />
     <Compile Include="Assets\Scripts\OldScripts\EffectBlock.cs" />
     <Compile Include="Assets\Scripts\OldScripts\EffectGenerator.cs" />
-    <Compile Include="Assets\Scripts\OldScripts\Explosions.cs" />
     <Compile Include="Assets\Scripts\OldScripts\FireworkLauncher.cs" />
     <Compile Include="Assets\Scripts\OldScripts\FloorFill.cs" />
     <Compile Include="Assets\Scripts\OldScripts\GlobalTimer.cs" />
-    <Compile Include="Assets\Scripts\OptionSelector.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\MenuEffectGestureControl.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\MenuTransition.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\Move.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\PlayMovieOnPlane.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\RandomRoam.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\SandFollow.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\WaterFollow.cs" />
     <Compile Include="Assets\Scripts\ParticleCollide.cs" />
     <Compile Include="Assets\Scripts\ParticleDiminish.cs" />
     <Compile Include="Assets\Scripts\ParticleEffectController.cs" />
     <Compile Include="Assets\Scripts\ParticleSpin.cs" />
-    <Compile Include="Assets\Scripts\PianoCollisionController.cs" />
-    <Compile Include="Assets\Scripts\PianoTrigger.cs" />
-    <Compile Include="Assets\Scripts\PlayMovieOnPlane.cs" />
-    <Compile Include="Assets\Scripts\RandomRoam.cs" />
-    <Compile Include="Assets\Scripts\SandFollow.cs" />
-    <Compile Include="Assets\Scripts\SimpleFrame.cs" />
     <Compile Include="Assets\Scripts\TTL.cs" />
     <Compile Include="Assets\Scripts\TimeSand.cs" />
-    <Compile Include="Assets\Scripts\ToggleMenu.cs" />
-    <Compile Include="Assets\Scripts\WaterFollow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportLibraries\Forest Grounds - Terrain Texture Pack\Readme.txt" />

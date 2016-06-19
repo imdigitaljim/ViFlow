@@ -311,7 +311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73669fed81aa6f846b2b99d60090baa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaitTime: 5
+  WaitTime: 3
+  XModifier: 30
+  YModifier: 50
+  UpdateTime: 0.3
 --- !u!1 &410339649
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,13 +651,13 @@ MonoBehaviour:
   TextureList:
   - {fileID: 2800000, guid: 6224db41f432ab94ab896f59a5ff4b9f, type: 3}
   - {fileID: 2800000, guid: 39ee990a32046fa43988079c60ef3f3d, type: 3}
-  - {fileID: 2800000, guid: 8030068e62d0d6e4bb6c320523bc43e4, type: 3}
-  - {fileID: 2800000, guid: 8030068e62d0d6e4bb6c320523bc43e4, type: 3}
+  - {fileID: 2800000, guid: 51f9103d6a91b7b40a1d1e0a609943e9, type: 3}
+  - {fileID: 2800000, guid: 689740456e0867446876659f57256739, type: 3}
   - {fileID: 2800000, guid: f7b13b851fe33c747998067242735bef, type: 3}
   - {fileID: 2800000, guid: f4f04b609ca9c524585740c554212986, type: 3}
-  - {fileID: 2800000, guid: c5b089f4c44083d41b5610e14a5f7716, type: 3}
-  - {fileID: 2800000, guid: b4c972e1bade796458fae93957674332, type: 3}
-  - {fileID: 2800000, guid: 82b62c3331a6d9943a27019e95c07ef6, type: 3}
+  - {fileID: 2800000, guid: e1a5740b771d9e44b972491ef4c881c5, type: 3}
+  - {fileID: 2800000, guid: 7b1d719e104ba4f4e9427eaeef53cdf3, type: 3}
+  - {fileID: 2800000, guid: 51937bbc17a16ac40a0126201cf4e533, type: 3}
   PrefabToActivate:
   - {fileID: 139746, guid: 665b675c8929f80428797c6df71b5f43, type: 2}
   - {fileID: 135654, guid: 58b54854ca500684f84e0ef071469159, type: 2}

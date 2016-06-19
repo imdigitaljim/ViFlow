@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class MenuUp : MonoBehaviour
-{
+public class MenuTransitionGesture : MonoBehaviour {
+
     private float _current;
     private bool _isActivated = false;
     private MenuManager _menuManager;
@@ -18,10 +17,7 @@ public class MenuUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((int) activatedY != 0)
-        {
-            
-        }
+
     }
 
     void OnTriggerStay(Collider c)
@@ -43,15 +39,26 @@ public class MenuUp : MonoBehaviour
         if (c.gameObject.tag == "Player")
         {
             exitY = c.gameObject.transform.position.y;
+
             if (Mathf.Abs(exitY - activatedY) > thresholdY - 1)
             {
-                Debug.Log("Move Up!");
-                var temp = (_menuManager.CurrentRange - 3);
-                if (temp < 0)
+                var movingUp = exitY - activatedY > 0;
+                //Debug.Log("Moving!");
+                if (movingUp)
                 {
-                    temp += MenuManager.TextureCount;
+                    //Debug.Log("Up!");
+                    var temp = (_menuManager.CurrentRange - 3);
+                    if (temp < 0)
+                    {
+                        temp += MenuManager.TextureCount;
+                    }
+                    _menuManager.CurrentRange = temp % MenuManager.TextureCount;
                 }
-                _menuManager.CurrentRange = temp % MenuManager.TextureCount;
+                else
+                {
+                    //Debug.Log("Down!");
+                    _menuManager.CurrentRange = (_menuManager.CurrentRange + 3) % MenuManager.TextureCount;
+                }
             }
             _current = 0;
             _isActivated = false;
