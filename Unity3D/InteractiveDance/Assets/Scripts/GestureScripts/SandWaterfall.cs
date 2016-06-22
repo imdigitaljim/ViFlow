@@ -19,6 +19,7 @@ public class SandWaterfall : MonoBehaviour, IGesturable
 	void Update ()
 	{
 	    if (!GestureActivation.IsGesturing) return;
+
         _ps.startSize = GestureManager.SandFall.StartSize;
         transform.position = new Vector3(GestureManager.SandFall.StartLocation, transform.position.y, transform.position.z);
         
