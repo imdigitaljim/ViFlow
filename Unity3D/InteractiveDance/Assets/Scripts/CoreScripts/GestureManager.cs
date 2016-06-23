@@ -71,48 +71,128 @@ namespace Assets.Scripts.CoreScripts
 
         public static class BounceBall
         {
-            private static Vector3 previousRightHandPostion;
-            private static Vector3 previousLeftHandPostion;
-
-            public static Vector3 forceVector;
-
-            private static float xSpeedFactor;
-            private const float xSpeedMin = -500, xSpeedMax = 500;
-            private static readonly GestureParameter SpeedGesture = new GestureParameter(xSpeedMin, xSpeedMax);
+            private static float _initialMagnitude = 1;
+            private const float MinMagnitude = 1, MaxMagnitude = 10;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinMagnitude, MaxMagnitude);
+            public static float Magnitude = 2;
 
             public static void Initialize()
             {
-                forceVector = new Vector3(0, 0, 0);
-                previousRightHandPostion = new Vector3(0, 0, 0);
-                previousLeftHandPostion = new Vector3(0, 0, 0);
-                xSpeedFactor = 0;
+                _initialMagnitude = Magnitude;
             }
 
-            public static void SetSpeedUpFactor(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
+            public static void SetMagnitude(float value)
             {
-                //We will set a speed up factor by comarping the current hand positions to the previous hand positions
-                //This gives a rough estimate of the speed of movement of the player
-                float xdistance = Vector3.Distance((new Vector3(leftHandX, leftHandY, 0)), previousLeftHandPostion);
-                xdistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * xdistance);
+                Magnitude = YGesture.Clamp(_initialMagnitude + YGesture.GetUnit() * value);
+            }
+        }
 
-                float ydistance = Vector3.Distance((new Vector3(rightHandX, rightHandY, 0)), previousRightHandPostion);
-                ydistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * ydistance);
+        public static class HandFire
+        {
+            private static float _initialSize;
+            private const float MinSize = 1.3f, MaxSize = 4.7f;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
+            public static float Size = 1.3f;
 
-                //Update the hand positions for the next iteration
-                previousRightHandPostion.x = rightHandX;
-                previousRightHandPostion.y = rightHandY;
-                previousLeftHandPostion.x = leftHandX;
-                previousLeftHandPostion.y = leftHandY;
+            private static float _initialDecay;
+            private const float MinDecay = .3f, MaxDecay = 3f;
+            private static readonly GestureParameter XGesture = new GestureParameter(MinDecay, MaxDecay);
+            public static float Decay = .4f;
 
-                //Set the force vector for the ball
-                forceVector.x = xdistance;
-                forceVector.y = ydistance;
+
+            public static void SetSize(float value)
+            {
+                Size = YGesture.Clamp(_initialSize + YGesture.GetUnit() * value);
+            }
+
+            public static void SetDecay(float value)
+            {
+                Decay = XGesture.Clamp(_initialDecay + XGesture.GetUnit() * value);
+            }
+
+            public static void Initialize()
+            {
+                _initialSize = Size;
+                _initialDecay = Decay;
+            }
+        }
+
+        public static class BlockWall
+        {
+
+            public static void Initialize()
+            {
 
             }
 
 
         }
 
+        public static class Fog
+        {
+            private static float _initialSize;
+            private const float MinSize = 5, MaxSize = 30;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
+            public static float Size = 15;
+
+            public static void Initialize()
+            {
+                _initialSize = Size;
+            }
+
+            public static void SetSize(float value)
+            {
+                Size = YGesture.Clamp(_initialSize + YGesture.GetUnit() * value);
+            }
+        }
+
+
+
+
+
+        //private static Vector3 initialScale;
+        //private static Vector3 previousRightHandPostion;
+        //private static Vector3 previousLeftHandPostion;
+
+        //public static Vector3 forceVector;
+
+        //private static float xSpeedFactor;
+        //private const float xSpeedMin = -500, xSpeedMax = 500;
+        //private static readonly GestureParameter SpeedGesture = new GestureParameter(xSpeedMin, xSpeedMax);
+
+        //public static void Initialize()
+        //{
+        //    forceVector = new Vector3(0, 0, 0);
+        //    previousRightHandPostion = new Vector3(0, 0, 0);
+        //    previousLeftHandPostion = new Vector3(0, 0, 0);
+        //    xSpeedFactor = 0;
+        //}
+
+        //public static void SetSpeedUpFactor(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
+        //{
+        //    //We will set a speed up factor by comarping the current hand positions to the previous hand positions
+        //    //This gives a rough estimate of the speed of movement of the player
+        //    float xdistance = Vector3.Distance((new Vector3(leftHandX, leftHandY, 0)), previousLeftHandPostion);
+        //    xdistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * xdistance);
+
+        //    float ydistance = Vector3.Distance((new Vector3(rightHandX, rightHandY, 0)), previousRightHandPostion);
+        //    ydistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * ydistance);
+
+        //    //Update the hand positions for the next iteration
+        //    previousRightHandPostion.x = rightHandX;
+        //    previousRightHandPostion.y = rightHandY;
+        //    previousLeftHandPostion.x = leftHandX;
+        //    previousLeftHandPostion.y = leftHandY;
+
+        //    //Set the force vector for the ball
+        //    forceVector.x = xdistance;
+        //    forceVector.y = ydistance;
+
+        //}
+
 
     }
+
+
+
 }

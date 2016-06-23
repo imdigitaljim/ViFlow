@@ -10931,6 +10931,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 495624}
+  - 114: {fileID: 11469438}
   m_Layer: 0
   m_Name: PrefabBlockWall
   m_TagString: Untagged
@@ -108947,6 +108948,17 @@ MonoBehaviour:
   Hangtime: 1
   Speed: -0.3
   ShrinkRate: 0.01
+--- !u!114 &11469438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3e999b21eb2f748bb63bcbbf07d2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11469446
 MonoBehaviour:
   m_ObjectHideFlags: 1

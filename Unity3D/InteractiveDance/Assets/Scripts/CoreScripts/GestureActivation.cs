@@ -15,10 +15,12 @@ public class GestureActivation : MonoBehaviour
     public float WaitTime, XModifier, YModifier, UpdateTime;
     private GameObject _leftHand, _rightHand;
     private Vector3 _initleftVector, _initrightVector;
+    private Renderer _quad;
     // Use this for initialization
     void Start()
     {
-
+        _quad = transform.parent.gameObject.GetComponent<Renderer>();
+        _quad.material.color = Color.green;
         GUIMessage = string.Empty;
     }
 
@@ -60,6 +62,7 @@ public class GestureActivation : MonoBehaviour
         _initrightVector = _rightHand.transform.position;
         ResetReadClock();
         IsGesturing = true;
+        _quad.material.color = Color.red;
         CurrentGesture.OnStart();
     }
     void EndGesture()
@@ -67,6 +70,7 @@ public class GestureActivation : MonoBehaviour
         IsGesturing = false;
         IsReading = false;
         ResetReadClock();
+        _quad.material.color = Color.green;
     }
 
     void ReadGesture()
@@ -97,6 +101,7 @@ public class GestureActivation : MonoBehaviour
         if (!IsReading)
         {
             IsReading = true;
+            _quad.material.color = Color.yellow;
             GUIMessage = WaitTime.ToString();
         }
         else if (IsGesturing)
@@ -112,11 +117,11 @@ public class GestureActivation : MonoBehaviour
         {
             GUI.Label(new Rect(1000, 100, 150, 100), string.Format("Countdown: {0}", GUIMessage));
         }
-        if (!IsGesturing) return;     
-        GUI.Label(new Rect(1000, 150, 150, 100), string.Format("Left X:{0}", _leftHandX.ToString()));
-        GUI.Label(new Rect(1000, 200, 150, 100), string.Format("Left Y:{0}", _leftHandY.ToString()));
-        GUI.Label(new Rect(1200, 150, 150, 100), string.Format("Right X:{0}", _rightHandX.ToString()));
-        GUI.Label(new Rect(1200, 200, 150, 100), string.Format("Right Y:{0}", _rightHandY.ToString()));
+        //if (!IsGesturing) return;     
+        //GUI.Label(new Rect(1000, 150, 150, 100), string.Format("Left X:{0}", _leftHandX.ToString()));
+        //GUI.Label(new Rect(1000, 200, 150, 100), string.Format("Left Y:{0}", _leftHandY.ToString()));
+        //GUI.Label(new Rect(1200, 150, 150, 100), string.Format("Right X:{0}", _rightHandX.ToString()));
+        //GUI.Label(new Rect(1200, 200, 150, 100), string.Format("Right Y:{0}", _rightHandY.ToString()));
         
 
     }

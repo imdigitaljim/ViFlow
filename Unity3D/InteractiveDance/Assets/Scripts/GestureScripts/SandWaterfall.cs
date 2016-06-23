@@ -25,16 +25,18 @@ public class SandWaterfall : MonoBehaviour, IGesturable
         
 	}
 
+    public void OnStart()
+    {
+        GestureManager.SandFall.Initialize();
+    }
+
     public void OnNext(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
     {
         GestureManager.SandFall.SetSize(leftHandY);
         GestureManager.SandFall.SetLocation(leftHandX);
     }
 
-    public void OnStart()
-    {
-        GestureManager.SandFall.Initialize();
-    }
+
     public void OnCompleted()
     {
 
