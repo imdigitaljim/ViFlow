@@ -27,6 +27,9 @@ public class GravityBall : MonoBehaviour, IGesturable
             //var y = ball.transform.position.y;
             //ball.AddForce(GestureManager.BounceBall.forceVector);
 
+            //multiply two vectors, component by component
+            Vector3.Scale(new Vector3(x, y, 0), GestureManager.BounceBall.forceVector);
+
             //_ps.startSize = GestureManager.SandFall.StartSize;
             //transform.position = new Vector3(GestureManager.SandFall.StartLocation, transform.position.y, transform.position.z);
 
