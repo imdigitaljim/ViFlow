@@ -200,6 +200,7 @@
     <Compile Include="Assets\Scripts\EffectSpecific\PianoTrigger.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\ColorPiano.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\Exploding.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\FireTrail.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\GestureParameter.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\GravityBall.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\HandColors.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Assets\Scripts\GestureScripts\RainFog.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\SandWaterfall.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\SnowWaterFall.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\WaterFallGstr.cs" />
     <Compile Include="Assets\Scripts\Identifier.cs" />
     <Compile Include="Assets\Scripts\ObjectKiller.cs" />
     <Compile Include="Assets\Scripts\OldScripts\ArrowPoint.cs" />

@@ -17,7 +17,7 @@ public class WaterFallGstr : MonoBehaviour, IGesturable
 
     public void OnStart()
     {
-        GestureManager.Waterfall.Initialize();
+       // GestureManager.Waterfall.Initialize();
     }
 
 
@@ -29,13 +29,13 @@ public class WaterFallGstr : MonoBehaviour, IGesturable
             { return; }
         else
         {
-            waterfall.localScale = GestureManager.Waterfall.scaleVector;
+            //waterfall.localScale = GestureManager.Waterfall.scaleVector;
         }
     }
 
     public void OnNext(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
     {
-        GestureManager.Waterfall.SetWaterFallScale(leftHandX, leftHandY, rightHandX, rightHandY);
+       // GestureManager.Waterfall.SetWaterFallScale(leftHandX, leftHandY, rightHandX, rightHandY);
     }
 
     public void OnCompleted()
