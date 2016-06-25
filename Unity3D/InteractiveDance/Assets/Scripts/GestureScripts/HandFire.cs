@@ -11,31 +11,39 @@ public class HandFire : MonoBehaviour, IGesturable
     void Start()
     {
         GestureActivation.CurrentGesture = this;
-        _leftHandFire =
-            GameObject.Find("LeftHand")
-                .transform
-                .GetChild(0) //ActiveEffects
-                .GetChild(0) //PrefabFire
-                .GetChild(0) //Containing GameObject
-                .gameObject.GetComponent<ParticleSystem>();
-        _rightHandFire =
-            GameObject.Find("RightHand")
-            .transform
-            .GetChild(0)
-            .GetChild(0)
-            .GetChild(0)
-            .gameObject.GetComponent<ParticleSystem>();
+        SetHandObjects();
+        SetGesture();
+    }
+
+    void SetGesture()
+    {
+        _leftHandFire.startSize = GestureManager.HandFire.Size;
+        _rightHandFire.startSize = GestureManager.HandFire.Size;
+        _leftHandFire.startLifetime = GestureManager.HandFire.Decay;
+        _rightHandFire.startLifetime = GestureManager.HandFire.Decay;
+    }
+
+    void SetHandObjects()
+    {
+        _leftHandFire = GameObject.Find("LeftHand")
+        .transform
+        .GetChild(0) //ActiveEffects
+        .GetChild(0) //PrefabFire
+        .GetChild(0) //Containing GameObject
+        .gameObject.GetComponent<ParticleSystem>();
+        _rightHandFire = GameObject.Find("RightHand")
+        .transform
+        .GetChild(0)
+        .GetChild(0)
+        .GetChild(0)
+        .gameObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (!GestureActivation.IsGesturing) return;
-        _leftHandFire.startSize = GestureManager.HandFire.Size;
-        _rightHandFire.startSize = GestureManager.HandFire.Size;
-        _leftHandFire.startLifetime = GestureManager.HandFire.Decay;
-        _rightHandFire.startLifetime = GestureManager.HandFire.Decay;
+        SetGesture();
     }
 
     public void OnStart()

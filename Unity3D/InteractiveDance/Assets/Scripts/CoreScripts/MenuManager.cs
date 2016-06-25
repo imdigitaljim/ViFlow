@@ -43,52 +43,55 @@ public class MenuManager : MonoBehaviour
 	    {
 	        for (var i = 0; i < OptionMax; i++)
 	        {
-                _options[i].GetComponent<Renderer>().material.mainTexture = TextureList[CurrentRange + i];
+	            try
+	            {
+	                _options[i].GetComponent<Renderer>().material.mainTexture = TextureList[CurrentRange + i];
+	            }
+	            catch (Exception e)
+	            {
+                    Debug.LogFormat("Checking Range {0}", CurrentRange + i);
+	                Debug.Log("BAD STATE");
+	            }
             }
             _hasChanged = false;
 	    }
-	    if (_newRange == CurrentRange)
-	    
-	    _hasChanged = true;
+	    if (_newRange == CurrentRange) return;
+        _hasChanged = true;
         _newRange = CurrentRange;
-	    
-
-		//Debug.Log("effect Gestures");
-
-	
+       
 	}
+
+    public void ClearEffects()
+    {
+        foreach (Transform child in Effect.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in _attachedEffectLeft.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in _attachedEffectRight.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in _attachedEffectBody.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        Destroy(CurrentDisplayEffect);
+    }
 
     public void ActivateElement(int x)
     {
         _attachedEffectLeft = GameObject.Find("AttachedEffectLeft");
         _attachedEffectRight = GameObject.Find("AttachedEffectRight");
         _attachedEffectBody = GameObject.Find("AttachedEffectBody");
-        try
-		{
-        	foreach (Transform child in Effect.transform)
-        	{
-        	    Destroy(child.gameObject);
-        	}
-        	foreach (Transform child in _attachedEffectLeft.transform)
-    	    {
-			    Destroy(child.gameObject);
-        	}
-		    foreach (Transform child in _attachedEffectRight.transform)
-		    {
-		        Destroy(child.gameObject);
-		    }
-            foreach (Transform child in _attachedEffectBody.transform)
-            {
-                Destroy(child.gameObject);
-            }
-        }
-		catch (System.Exception e)
-		{
-			Debug.Log(e.ToString());
-		}
+
+        ClearEffects();
 
 
-		Destroy(CurrentDisplayEffect);
 
         if (IsAttached[x + CurrentRange])
         {

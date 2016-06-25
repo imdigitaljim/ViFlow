@@ -42,31 +42,25 @@ namespace Assets.Scripts.CoreScripts
 
         public static class Piano
         {
-            private static float _initialX = 1, _initialY = 1;
+            private static Vector2 _initial = new Vector2(1, 1);
+            public static Vector2 Value = new Vector2(1, 1);
             private const float StartXMin = 0, StartXMax = 1;
-            private static readonly GestureParameter XGesture = new GestureParameter(StartXMin, StartXMax);
-            public static float X = 1;
-
-
             private const float StartYMin = 0, StartYMax = 1;
+            private static readonly GestureParameter XGesture = new GestureParameter(StartXMin, StartXMax);
             private static readonly GestureParameter YGesture = new GestureParameter(StartYMin, StartYMax);
-            public static float Y = 1;
 
             public static void Initialize()
             {
-                _initialX = X;
-                _initialY = Y;
+                _initial = Value;
             }
 
-            public static void SetX(float value)
+            public static void SetGestureValues(float x, float y)
             {
-                X = XGesture.Clamp(_initialX + XGesture.GetUnit() * value);
+                var xValue = XGesture.Clamp(_initial.x + XGesture.GetUnit() * x);
+                var yValue = YGesture.Clamp(_initial.y - YGesture.GetUnit() * y);
+                Value = new Vector2(xValue, yValue);
             }
 
-            public static void SetY(float value)
-            {
-                Y = YGesture.Clamp(_initialY - YGesture.GetUnit() * value);
-            }
         }
 
         public static class BounceBall
@@ -89,16 +83,12 @@ namespace Assets.Scripts.CoreScripts
 
         public static class HandFire
         {
-            private static float _initialSize;
+            private static float _initialSize, _initialDecay;
             private const float MinSize = 1.3f, MaxSize = 4.7f;
-            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
-            public static float Size = 1.3f;
-
-            private static float _initialDecay;
             private const float MinDecay = .3f, MaxDecay = 3f;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
             private static readonly GestureParameter XGesture = new GestureParameter(MinDecay, MaxDecay);
-            public static float Decay = .4f;
-
+            public static float Size = 1.3f, Decay = .4f;
 
             public static void SetSize(float value)
             {
@@ -119,13 +109,24 @@ namespace Assets.Scripts.CoreScripts
 
         public static class BlockWall
         {
+            private static Vector2 _initial = new Vector2(79, -75);
+            public static Vector2 Value = new Vector2(79, -75);
+            private const float XMin = 79, XMax = 116;
+            private const float YMin = -94, YMax = -62;
+            private static readonly GestureParameter XGesture = new GestureParameter(XMin, XMax);
+            private static readonly GestureParameter YGesture = new GestureParameter(YMin, YMax);
 
             public static void Initialize()
             {
-
+                _initial = Value;
             }
 
-
+            public static void SetGestureValues(float x, float y)
+            {
+                var xValue = XGesture.Clamp(_initial.x - XGesture.GetUnit() * x);
+                var yValue = YGesture.Clamp(_initial.y + YGesture.GetUnit() * y);
+                Value = new Vector2(xValue, yValue);
+            }
         }
 
         public static class Fog
@@ -146,50 +147,63 @@ namespace Assets.Scripts.CoreScripts
             }
         }
 
+        public static class Explode
+        {
+            private static Vector2 _initial = new Vector2(79, -75);
+            public static Vector2 Value = new Vector2(79, -75);
+            private const float XMin = 15.5f, XMax = 116;
+            private const float YMin = -67, YMax = -22;
+            private static readonly GestureParameter XGesture = new GestureParameter(XMin, XMax);
+            private static readonly GestureParameter YGesture = new GestureParameter(YMin, YMax);
 
+            public static void Initialize()
+            {
+                _initial = Value;
+            }
 
+            public static void SetGestureValues(float x, float y)
+            {
+                var xValue = XGesture.Clamp(_initial.x - XGesture.GetUnit() * x);
+                var yValue = YGesture.Clamp(_initial.y + YGesture.GetUnit() * y);
+                Value = new Vector2(xValue, yValue);
+            }
+        }
 
+        public static class Aura
+        {
+            private static float _initialSize;
+            private const float MinSize = 100f, MaxSize = 5000f;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
+            public static float Size = 100f;
 
-        //private static Vector3 initialScale;
-        //private static Vector3 previousRightHandPostion;
-        //private static Vector3 previousLeftHandPostion;
+            public static void SetSize(float value)
+            {
+                Size = YGesture.Clamp(_initialSize + YGesture.GetUnit() * value);
+            }
 
-        //public static Vector3 forceVector;
+            public static void Initialize()
+            {
+                _initialSize = Size;
+            }
+        }
 
-        //private static float xSpeedFactor;
-        //private const float xSpeedMin = -500, xSpeedMax = 500;
-        //private static readonly GestureParameter SpeedGesture = new GestureParameter(xSpeedMin, xSpeedMax);
+        public static class Waterfall
+        {
+            private static float _initialSize;
+            private const float MinSize = .1f, MaxSize = .38f;
+            private static readonly GestureParameter YGesture = new GestureParameter(MinSize, MaxSize);
+            public static float Size = .25f;
 
-        //public static void Initialize()
-        //{
-        //    forceVector = new Vector3(0, 0, 0);
-        //    previousRightHandPostion = new Vector3(0, 0, 0);
-        //    previousLeftHandPostion = new Vector3(0, 0, 0);
-        //    xSpeedFactor = 0;
-        //}
+            public static void SetSize(float value)
+            {
+                Size = YGesture.Clamp(_initialSize + YGesture.GetUnit() * value);
+            }
 
-        //public static void SetSpeedUpFactor(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
-        //{
-        //    //We will set a speed up factor by comarping the current hand positions to the previous hand positions
-        //    //This gives a rough estimate of the speed of movement of the player
-        //    float xdistance = Vector3.Distance((new Vector3(leftHandX, leftHandY, 0)), previousLeftHandPostion);
-        //    xdistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * xdistance);
-
-        //    float ydistance = Vector3.Distance((new Vector3(rightHandX, rightHandY, 0)), previousRightHandPostion);
-        //    ydistance = SpeedGesture.Clamp(xSpeedFactor + SpeedGesture.GetUnit() * ydistance);
-
-        //    //Update the hand positions for the next iteration
-        //    previousRightHandPostion.x = rightHandX;
-        //    previousRightHandPostion.y = rightHandY;
-        //    previousLeftHandPostion.x = leftHandX;
-        //    previousLeftHandPostion.y = leftHandY;
-
-        //    //Set the force vector for the ball
-        //    forceVector.x = xdistance;
-        //    forceVector.y = ydistance;
-
-        //}
-
+            public static void Initialize()
+            {
+                _initialSize = Size;
+            }
+        }
 
     }
 

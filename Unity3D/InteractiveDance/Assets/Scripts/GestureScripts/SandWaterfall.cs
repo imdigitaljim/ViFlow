@@ -13,17 +13,21 @@ public class SandWaterfall : MonoBehaviour, IGesturable
     {
         GestureActivation.CurrentGesture = this;
 	    _ps = gameObject.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
-	}
-	
+        SetGesture();
+    }
+
+    void SetGesture()
+    {
+        _ps.startSize = GestureManager.SandFall.StartSize;
+        transform.position = new Vector3(GestureManager.SandFall.StartLocation, transform.position.y, transform.position.z);
+    }
+
 	// Update is called once per frame
 	void Update ()
 	{
 	    if (!GestureActivation.IsGesturing) return;
-
-        _ps.startSize = GestureManager.SandFall.StartSize;
-        transform.position = new Vector3(GestureManager.SandFall.StartLocation, transform.position.y, transform.position.z);
-        
-	}
+        SetGesture();
+    }
 
     public void OnStart()
     {

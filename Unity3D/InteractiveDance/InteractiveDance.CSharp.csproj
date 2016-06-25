@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -200,7 +202,6 @@
     <Compile Include="Assets\Scripts\EffectSpecific\PianoTrigger.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\ColorPiano.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\Exploding.cs" />
-    <Compile Include="Assets\Scripts\GestureScripts\FireTrail.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\GestureParameter.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\GravityBall.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\HandColors.cs" />
@@ -208,8 +209,7 @@
     <Compile Include="Assets\Scripts\GestureScripts\PixelBlocks.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\RainFog.cs" />
     <Compile Include="Assets\Scripts\GestureScripts\SandWaterfall.cs" />
-    <Compile Include="Assets\Scripts\GestureScripts\SnowWaterFall.cs" />
-    <Compile Include="Assets\Scripts\GestureScripts\WaterFallGstr.cs" />
+    <Compile Include="Assets\Scripts\GestureScripts\WhiteWaterFall.cs" />
     <Compile Include="Assets\Scripts\Identifier.cs" />
     <Compile Include="Assets\Scripts\ObjectKiller.cs" />
     <Compile Include="Assets\Scripts\OldScripts\ArrowPoint.cs" />
@@ -221,6 +221,7 @@
     <Compile Include="Assets\Scripts\OldScripts\Cubes.cs" />
     <Compile Include="Assets\Scripts\OldScripts\EffectBlock.cs" />
     <Compile Include="Assets\Scripts\OldScripts\EffectGenerator.cs" />
+    <Compile Include="Assets\Scripts\OldScripts\FireTrail.cs" />
     <Compile Include="Assets\Scripts\OldScripts\FireworkLauncher.cs" />
     <Compile Include="Assets\Scripts\OldScripts\FloorFill.cs" />
     <Compile Include="Assets\Scripts\OldScripts\GlobalTimer.cs" />

@@ -8,7 +8,7 @@ using Assets.Scripts.CoreScripts;
 public class ColorPiano : MonoBehaviour, IGesturable
 {
 
-    private List<Renderer> _tiles = new List<Renderer>();
+    private readonly List<Renderer> _tiles = new List<Renderer>();
     public void OnCompleted()
     {
 
@@ -16,8 +16,7 @@ public class ColorPiano : MonoBehaviour, IGesturable
 
     public void OnNext(float leftHandX, float leftHandY, float rightHandX, float rightHandY)
     {
-        GestureManager.Piano.SetX(leftHandX);
-        GestureManager.Piano.SetY(leftHandY);
+        GestureManager.Piano.SetGestureValues(leftHandX, leftHandY);
     }
 
     public void OnStart()
@@ -33,21 +32,24 @@ public class ColorPiano : MonoBehaviour, IGesturable
             _tiles.Add(tile.gameObject.GetComponent<Renderer>());
         }
         GestureActivation.CurrentGesture = this;
-        //get components
+        SetGesture();
+    }
+
+
+    void SetGesture()
+    {
+        var color = EffectUtility.Vector2ToColor(GestureManager.Piano.Value);
+        foreach (var tile in _tiles)
+        {
+            tile.material.color = color;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GestureActivation.IsGesturing) return;      
-        var color = EffectUtility.FloatToColor(GestureManager.Piano.X, GestureManager.Piano.Y);
-        foreach (var tile in _tiles)
-        {
-            tile.material.color = color;
-        }
-        
-
-        //set components
+        if (!GestureActivation.IsGesturing) return;
+        SetGesture();
     }
 
 
