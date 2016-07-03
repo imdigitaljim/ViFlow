@@ -10,3 +10,11 @@ so the resulting path is:
 Unity3D/InteractiveDance/Assets/ImportedLibraries/(all the files)  
 
 Place all assets here and update the asset file seperately.
+
+Running locally/testing/demoing requires a Microsoft Kinect for Windows or Microsoft Kinect for XBox with the Windows USB Adapter.  
+Usage:  
+Run the Unity project, the connection will block with a black screen.  
+Run the Kinect Visual Studio application.   
+
+
+Running production requires infrared filters, lights, and infrared camera.
