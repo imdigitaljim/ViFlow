@@ -20,9 +20,9 @@ public class BodyController : MonoBehaviour {
     public GameObject BodyPrefab;
 
     //connection info 
-    private static readonly IPEndPoint IpEndPoint = new IPEndPoint(IPAddress.Any, 9050);
-    private static IPEndPoint _sender = new IPEndPoint(IPAddress.Any, 0);
-    private static readonly UdpClient Server = new UdpClient(IpEndPoint);
+    private static readonly IPEndPoint IpEndPoint = new IPEndPoint(IPAddress.Any, 9050); // Ports have to line up in python code
+    private static IPEndPoint _sender = new IPEndPoint(IPAddress.Any, 0); // Possibly take out IPAd...Any and put in local host (127.0.0.1)
+    private static readonly UdpClient Server = new UdpClient(IpEndPoint); 
     private byte[] _data;
 
     public static SimpleFrame Bodies = new SimpleFrame();
@@ -31,7 +31,7 @@ public class BodyController : MonoBehaviour {
     void Start()
     {
         _data = new byte[65535];
-        _data = Server.Receive(ref _sender);
+    //    _data = Server.Receive(ref _sender); //Commented to keep from freezing at Play
         Debug.Log(Encoding.ASCII.GetString(_data, 0, _data.Length));
     }
 
@@ -48,11 +48,22 @@ public class BodyController : MonoBehaviour {
         {
             _data = Server.Receive(ref _sender);
 
-            var serializer = MessagePackSerializer.Get<SimpleFrame>();
+            var serializer = MessagePackSerializer.Get<SimpleFrame>(); //Actual points
+        //    var serializer = MessagePackSerializer.Get<String>(); //Debug, swap comment with above
+
             using (var stream = new MemoryStream(_data))
             {
-                Bodies = serializer.Unpack(stream);
+               Bodies = serializer.Unpack(stream); //Actual Points ERROR, WHY?!?!?!?!
+        //       Debug.Log(serializer.Unpack(stream)); //Debug, swap comment with above
+               foreach(var body in Bodies.Data)
+                {
+                    Debug.Log(body.Key);
+                    Debug.Log(body.Value.Joints[0].Point);
+                }
+                Debug.Log("done printing");
+                Debug.Log(Bodies.Data.Count); // -> "1" = WORKING!!! (more or less)
             }
+
 
         }
     }
@@ -107,10 +118,4 @@ public class BodyController : MonoBehaviour {
             }
         }
     }
-
-
-
-
-
-
 }

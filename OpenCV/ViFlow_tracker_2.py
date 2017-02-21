@@ -19,6 +19,8 @@ import time
 import array
 import cv2
 import msgpack
+import msgpack_numpy as mn
+mn.patch()
 
 class Form():
     #Basic Form Class
@@ -207,28 +209,65 @@ class Form():
             legRY = legLY
             legLY = temp
 
+        
+        print("Before conversion:")
+        print("x,y: ", x, y)
+        print("lx,ly: ", lx, ly)
+        print("rx,ry: ", rx, ry)
+        print("hx,hy: ", hx, hy)
+        print("legLX,legLY: ", legLX, legLY)
+        print("legRX,legRY: ", legRX, legRY)
+
+        #Convert numpy int32 data to int data
+        lx = np.int32(lx).item() 
+        ly = np.int32(ly).item()
+        rx = np.int32(rx).item()
+        ry = np.int32(ry).item()
+        hx = np.int32(hx).item()
+        hy = np.int32(hy).item()
+        legLX = np.int32(legLX).item()
+        legLY = np.int32(legLY).item()
+        legRX = np.int32(legRX).item()
+        legRY = np.int32(legRY).item()
+
+        print("After conversion:")
+        print("x,y: ", x, y)
+        print("lx,ly: ", lx, ly)
+        print("rx,ry: ", rx, ry)
+        print("hx,hy: ", hx, hy)
+        print("legLX,legLY: ", legLX, legLY)
+        print("legRX,legRY: ", legRX, legRY)
+
+        print("x,y type: ", type(x), type(y))
+        print("lx,ly type: ", type(lx), type(ly))
+        print("rx,ry type: ", type(rx), type(ry))
+        print("hx,hy type: ", type(hx), type(hy))
+        print("legLX,legLY type: ", type(legLX), type(legLY))
+        print("legRX,legRY type: ", type(legRX), type(legRY))
+        
+        
         message = { self.id:
                     [
-                        [[x,y], 0],
-                        [[x,y], 1],
-                        [[hx,hy], 2],
-                        [[hx,hy], 3],
-                        [[hx,hy], 4],
-                        [[lx,ly], 5],
-                        [[lx,ly], 6],
+                        [[0,0], 0],
+                        [[0,0], 1],
+                        [[0,0], 2], # hx,hy wonky
+                        [[0,0], 3],
+                        [[0,0], 4],
+                        [[0,0], 5],
+                        [[0,0], 6],
                         [[legLX,legLY], 7],
-                        [[hx,hy], 8],
-                        [[rx,ry], 9],
-                        [[rx,ry], 10],
+                        [[0,0], 8],            # On unity side, may have to consider the wrist points as well
+                        [[0,0], 9],            # Feet points are sent in place of the hand points
+                        [[0,0], 10],
                         [[legRX,legRY], 11],
-                        [[x,y],[x,y], 12],
-                        [[legLX,legLY], 13],
-                        [[legLX,legLY], 14],
-                        [[x,y], 15],
-                        [[x,y], 16],
-                        [[legRX,legRY], 17],
-                        [[legRX,legRY], 18],
-                        [[0,0], 19],
+                        [[0,0], 12],
+                        [[0,0], 13],
+                        [[0,0], 14],
+                        [[0,0], 15],            #FootLeft in SimpleFrame
+                        [[0,0], 16],
+                        [[0,0], 17],
+                        [[0,0], 18],
+                        [[0,0], 19],            #FootRight in SimpleFrame
                         [[0,0], 20],
                         [[0,0], 21],
                         [[0,0], 22],
@@ -236,9 +275,9 @@ class Form():
                     ]
                   }
 
-        print(type(message))
+        #print(type(message))
         print(message)
-        mess = msgpack.packb(str(message))
+        mess = msgpack.packb(message)
         #                                    + str(lx) + "," + str(ly) + ","\
         #                                    + str(rx) + "," + str(ry) + ","\
         #                                    + str(hx) + "," + str(hy) + ","\
