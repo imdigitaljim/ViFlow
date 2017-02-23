@@ -26,8 +26,10 @@ public class BodyController : MonoBehaviour {
     private byte[] _data;
 
     public static SimpleFrame Bodies = new SimpleFrame();
+    public List<int> theData = new List<int>();
     public float Modifier;
     public Vector2 minThreshold;
+    
     void Start()
     {
         _data = new byte[65535];
@@ -48,23 +50,71 @@ public class BodyController : MonoBehaviour {
         {
             _data = Server.Receive(ref _sender);
 
-            var serializer = MessagePackSerializer.Get<SimpleFrame>(); //Actual points
+            var serializer = MessagePackSerializer.Get<List<int>>(); //IR code
+        //    var serializer = MessagePackSerializer.Get<SimpleFrame>(); //Actual points #Kinect, WORKS!
+
         //    var serializer = MessagePackSerializer.Get<String>(); //Debug, swap comment with above
 
             using (var stream = new MemoryStream(_data))
             {
-               Bodies = serializer.Unpack(stream); //Actual Points ERROR, WHY?!?!?!?!
+        //       Bodies = serializer.Unpack(stream); //Actual Points ERROR, WHY?!?!?!?!
+                theData = serializer.Unpack(stream);
+
+                SimpleJoint Joint = new SimpleJoint();
+
+                //Check to see if dancer is already in Bodies dict
+                //If not init and add dancer and joints
+                if(!Bodies.Data.ContainsKey((ulong)theData[0])){
+                    //create temp joint and body variables to store new data
+                    SimpleBody Joints = new SimpleBody();
+                    //skip dancer id 
+                    int j = 1;
+                    //Getting data from stream for each joint and putting 
+                    //joint class into simple body array at enum index
+                    while(j < theData.Count){
+                        Joint.Point.x = theData[j++];
+                        Joint.Point.y = theData[j++];
+                        //Joint.Type = theData[j++];
+                        Joint.Type = JointType.Head;
+                        Joints.Joints.Add(Joint);
+                    }
+                    //Add new SimpleBody list to SimpleFrame dict
+                    Bodies.Data.Add((ulong)theData[0], Joints);
+                } 
+                else 
+                {
+                    foreach(var body in Bodies.Data){
+                        int j = 1;
+                        while(j < theData.Count){
+                            Joint.Point.x = theData[j++];
+                            Joint.Point.y = theData[j++];
+                            //Joint.Type = theData[j++];
+                            Joint.Type = JointType.Head;
+                            Debug.Log(body.GetType());
+                            body.Value.Joints.Add(Joint);
+                        }
+                    }
+                }
+
+                
+
         //       Debug.Log(serializer.Unpack(stream)); //Debug, swap comment with above
-               foreach(var body in Bodies.Data)
+
+        /*       foreach(var body in Bodies.Data)
                 {
                     Debug.Log(body.Key);
                     Debug.Log(body.Value.Joints[0].Point);
                 }
-                Debug.Log("done printing");
-                Debug.Log(Bodies.Data.Count); // -> "1" = WORKING!!! (more or less)
+        */        
+                foreach(var datum in theData)
+                {
+                    Debug.Log(datum);
+                }
+
+
+            //    Debug.Log("done printing");
+            //    Debug.Log(Bodies.Data.Count); // -> "1" = WORKING!!! (more or less)
             }
-
-
         }
     }
 

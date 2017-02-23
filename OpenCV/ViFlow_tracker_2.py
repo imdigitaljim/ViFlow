@@ -19,8 +19,9 @@ import time
 import array
 import cv2
 import msgpack
-import msgpack_numpy as mn
-mn.patch()
+import array
+#import msgpack_numpy as mn
+#mn.patch()
 
 class Form():
     #Basic Form Class
@@ -209,7 +210,7 @@ class Form():
             legRY = legLY
             legLY = temp
 
-        
+        '''
         print("Before conversion:")
         print("x,y: ", x, y)
         print("lx,ly: ", lx, ly)
@@ -217,6 +218,7 @@ class Form():
         print("hx,hy: ", hx, hy)
         print("legLX,legLY: ", legLX, legLY)
         print("legRX,legRY: ", legRX, legRY)
+        '''
 
         #Convert numpy int32 data to int data
         lx = np.int32(lx).item() 
@@ -230,6 +232,7 @@ class Form():
         legRX = np.int32(legRX).item()
         legRY = np.int32(legRY).item()
 
+        '''
         print("After conversion:")
         print("x,y: ", x, y)
         print("lx,ly: ", lx, ly)
@@ -244,36 +247,14 @@ class Form():
         print("hx,hy type: ", type(hx), type(hy))
         print("legLX,legLY type: ", type(legLX), type(legLY))
         print("legRX,legRY type: ", type(legRX), type(legRY))
+        '''
         
         
-        message = { self.id:
-                    [
-                        [[0,0], 0],
-                        [[0,0], 1],
-                        [[0,0], 2], # hx,hy wonky
-                        [[0,0], 3],
-                        [[0,0], 4],
-                        [[0,0], 5],
-                        [[0,0], 6],
-                        [[legLX,legLY], 7],
-                        [[0,0], 8],            # On unity side, may have to consider the wrist points as well
-                        [[0,0], 9],            # Feet points are sent in place of the hand points
-                        [[0,0], 10],
-                        [[legRX,legRY], 11],
-                        [[0,0], 12],
-                        [[0,0], 13],
-                        [[0,0], 14],
-                        [[0,0], 15],            #FootLeft in SimpleFrame
-                        [[0,0], 16],
-                        [[0,0], 17],
-                        [[0,0], 18],
-                        [[0,0], 19],            #FootRight in SimpleFrame
-                        [[0,0], 20],
-                        [[0,0], 21],
-                        [[0,0], 22],
-                        [[0,0], 23]
-                    ]
-                  }
+        # On unity side, may have to consider the wrist points as well
+        # Feet points are sent in place of the hand points
+
+        message = [ self.id, legLX, legLY, 7, legRX, legRY, 11 ]    # 7 -> HandLeft in SimpleFrame, 11 -> HandRight in SimpleFrame
+        # self.id, legLX, legLY, 7, legRX, legRY, 11          
 
         #print(type(message))
         print(message)
@@ -502,7 +483,7 @@ cap = cv2.VideoCapture(0) #create an object of VideoCapture with device id as pa
 fname = "02_100.MP4"
 flength = 100 # Length of video file in frames
 loop = False #True if the video needs to be stored into fname = 02_100.MP4
-colorTracking = False #If colorTracking is true, then will use for color tracking, otherwise will use IR tradking
+colorTracking = True #If colorTracking is true, then will use for color tracking, otherwise will use IR tradking
 if loop: #to record video
     cap = cv2.VideoCapture(fname)
 c = 0  
