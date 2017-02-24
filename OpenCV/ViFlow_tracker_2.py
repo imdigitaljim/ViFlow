@@ -253,7 +253,14 @@ class Form():
         # On unity side, may have to consider the wrist points as well
         # Feet points are sent in place of the hand points
 
-        message = [ self.id, legLX, legLY, 7, legRX, legRY, 11 ]    # 7 -> HandLeft in SimpleFrame, 11 -> HandRight in SimpleFrame
+        message = [ self.id, x,y,0, x,y,1, hx,hy,2, hx,hy,3, legLX,legLY,4, legLX,legLY,5, legLX,legLY,6, legLX,legLY,7, 
+                    legRX,legRY,8, legRX,legRY,9, legRX,legRY,10, legRX,legRY,11,
+                    legLX,legLY,12, legLX,legLY,13, legLX,legLY,14, legLX,legLY,15,
+                    legRX,legRY,16, legRX,legRY,17, legRX,legRY,18, legRX,legRY,19,
+                    x,y,20, legLX, legLY,21, legLX,legLY,22, legRX,legRY,23, legRX,legRY,24 
+         ]    
+
+        # 7 -> HandLeft in SimpleFrame, 11 -> HandRight in SimpleFrame
         # self.id, legLX, legLY, 7, legRX, legRY, 11          
 
         #print(type(message))
@@ -267,7 +274,7 @@ class Form():
         #Download msgpack -> https://pypi.python.org/pypi/msgpack-python, message has to match the following:
         '''
                 public enum JointType{
-                    SpineBase, SpineMid, Neck, Head, ShoulderLeft, ElbowLeft, WristLeft, HandLeft, ShoulderRight, ElbowRight, WristRight, HandRight, HipLeft, KneeLeft, !AnkleLeft, FootLeft, HipRight, KneeRight, AnkleRight, FootRight, SpineShoulder, HandTipLeft, ThumbLeft, HandTipRight, ThumbRight
+                    SpineBase, SpineMid, Neck, Head, ShoulderLeft, ElbowLeft, WristLeft, HandLeft, ShoulderRight, ElbowRight, WristRight, HandRight, HipLeft, KneeLeft, AnkleLeft, FootLeft, HipRight, KneeRight, AnkleRight, FootRight, SpineShoulder, HandTipLeft, ThumbLeft, HandTipRight, ThumbRight
                 }
 
 

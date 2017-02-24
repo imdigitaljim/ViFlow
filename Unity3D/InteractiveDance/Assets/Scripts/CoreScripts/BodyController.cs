@@ -50,6 +50,8 @@ public class BodyController : MonoBehaviour {
         {
             _data = Server.Receive(ref _sender);
 
+        // MAYBE JUST SEND THE LEFT FOOT SINCE THE RIGHT FOOT IS WONKY FROM PYTHON
+
             var serializer = MessagePackSerializer.Get<List<int>>(); //IR code
         //    var serializer = MessagePackSerializer.Get<SimpleFrame>(); //Actual points #Kinect, WORKS!
 
@@ -74,8 +76,9 @@ public class BodyController : MonoBehaviour {
                     while(j < theData.Count){
                         Joint.Point.x = theData[j++];
                         Joint.Point.y = theData[j++];
-                        //Joint.Type = theData[j++];
-                        Joint.Type = JointType.Head;
+                        Joint.Type = (JointType)theData[j++];
+                        //Joint.Type = JointType.Head;
+                        Debug.Log("LLegX: " + Joint.Point.x + ", LLegY: " + Joint.Point.y);
                         Joints.Joints.Add(Joint);
                     }
                     //Add new SimpleBody list to SimpleFrame dict
@@ -85,12 +88,15 @@ public class BodyController : MonoBehaviour {
                 {
                     foreach(var body in Bodies.Data){
                         int j = 1;
+                        body.Value.Joints.Clear();
+
                         while(j < theData.Count){
                             Joint.Point.x = theData[j++];
                             Joint.Point.y = theData[j++];
-                            //Joint.Type = theData[j++];
-                            Joint.Type = JointType.Head;
-                            Debug.Log(body.GetType());
+                            Joint.Type = (JointType)theData[j++];
+                            //Joint.Type = JointType.Head; // <- Fix!!!
+                            //Debug.Log(body.GetType());
+                            Debug.Log("LLegX: " + Joint.Point.x + ", LLegY: " + Joint.Point.y);
                             body.Value.Joints.Add(Joint);
                         }
                     }
