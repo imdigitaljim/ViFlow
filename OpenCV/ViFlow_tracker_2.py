@@ -23,6 +23,11 @@ import array
 #import msgpack_numpy as mn
 #mn.patch()
 
+lx_array = []
+ly_array = []
+rx_array = []
+ry_array = []
+
 class Form():
     #Basic Form Class
     # Each form is serializable with self.id
@@ -209,6 +214,10 @@ class Form():
             temp = legRY
             legRY = legLY
             legLY = temp
+        lx_array.append(legLX)
+        ly_array.append(legLY)
+        rx_array.append(legRX)
+        ry_array.append(legRY)
 
         '''
         print("Before conversion:")
@@ -221,6 +230,8 @@ class Form():
         '''
 
         #Convert numpy int32 data to int data
+
+
         lx = np.int32(lx).item() 
         ly = np.int32(ly).item()
         rx = np.int32(rx).item()
@@ -490,7 +501,7 @@ cap = cv2.VideoCapture(0) #create an object of VideoCapture with device id as pa
 fname = "02_100.MP4"
 flength = 100 # Length of video file in frames
 loop = False #True if the video needs to be stored into fname = 02_100.MP4
-colorTracking = True #If colorTracking is true, then will use for color tracking, otherwise will use IR tradking
+colorTracking = False #If colorTracking is true, then will use for color tracking, otherwise will use IR tradking
 if loop: #to record video
     cap = cv2.VideoCapture(fname)
 c = 0  
@@ -605,10 +616,12 @@ while(run):
             #break
             clear()
             cap = cv2.VideoCapture(fname)
+
             c = 0
 
     # Capture frame-by-frame
     ret, frame = cap.read()
+    print(frame.shape)
     #print ret
 
     # Our operations on the frame come here
@@ -638,5 +651,10 @@ while(run):
     if 0xFF & cv2.waitKey(WAIT) == KEY_ESC:
         run = False
 
+
+print('Left Leg X', average(lx_array), np.std(lx_array))
+print('Left Leg Y', average(ly_array), np.std(ly_array))
+print('Right Leg X', average(rx_array), np.std(rx_array))
+print('Right Leg Y', average(ry_array), np.std(ry_array))
 cv2.destroyAllWindows()
 sys.exit()

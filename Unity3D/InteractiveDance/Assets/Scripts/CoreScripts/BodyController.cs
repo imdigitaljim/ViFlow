@@ -13,6 +13,7 @@ using System.Threading;
 using MsgPack.Serialization;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 public class BodyController : MonoBehaviour {
 
@@ -29,9 +30,23 @@ public class BodyController : MonoBehaviour {
     public List<int> theData = new List<int>();
     public float Modifier;
     public Vector2 minThreshold;
+    //Mathf.Tan tanFun;
+    private Camera mCamera;
+
+    //tanFun = Mathf.Tan;
+    //mCamera = GetComponent<Camera>();
+    private float rad = Mathf.Deg2Rad;
+    private int  z = 110;
+    private float frustHeight;
+    private float frustWidth;
+
+    //Debug.Log("frustHeight: " + frustHeight + " FrustWidth: " + frustWidth);
     
     void Start()
     {
+        mCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        frustHeight = (float)(2.0 * z * Mathf.Tan((float)(mCamera.fieldOfView * 0.5 * rad)));
+        frustWidth = frustHeight * mCamera.aspect;
         _data = new byte[65535];
     //    _data = Server.Receive(ref _sender); //Commented to keep from freezing at Play
         Debug.Log(Encoding.ASCII.GetString(_data, 0, _data.Length));
@@ -62,7 +77,7 @@ public class BodyController : MonoBehaviour {
         //       Bodies = serializer.Unpack(stream); //Actual Points ERROR, WHY?!?!?!?!
                 theData = serializer.Unpack(stream);
 
-                SimpleJoint Joint = new SimpleJoint();
+                SimpleJoint Joint; // = new SimpleJoint();
 
                 //Check to see if dancer is already in Bodies dict
                 //If not init and add dancer and joints
@@ -74,8 +89,12 @@ public class BodyController : MonoBehaviour {
                     //Getting data from stream for each joint and putting 
                     //joint class into simple body array at enum index
                     while(j < theData.Count){
-                        Joint.Point.x = theData[j++];
-                        Joint.Point.y = theData[j++];
+                        Joint = new SimpleJoint();
+                        //before shifting to unity field
+                        //Joint.Point.x = theData[j++];
+                        //Joint.Point.y = theData[j++];
+                        Joint.Point.x = (theData[j++] / 640) * frustWidth;
+                        Joint.Point.y = (theData[j++] / 480) * frustHeight;
                         Joint.Type = (JointType)theData[j++];
                         //Joint.Type = JointType.Head;
                         Debug.Log("LLegX: " + Joint.Point.x + ", LLegY: " + Joint.Point.y);
@@ -87,17 +106,17 @@ public class BodyController : MonoBehaviour {
                 else 
                 {
                     foreach(var body in Bodies.Data){
-                        int j = 1;
-                        body.Value.Joints.Clear();
+                        int j = 0;
+                        int bound = (theData.Count-1)/3;
+                        Debug.Log("LLegX: " + theData[15] + ", LLegY: " + theData[16]);
 
-                        while(j < theData.Count){
-                            Joint.Point.x = theData[j++];
-                            Joint.Point.y = theData[j++];
-                            Joint.Type = (JointType)theData[j++];
+                        while(j < bound){
+                            body.Value.Joints[j].Point.x = (theData[(j*3)+1] / 640) * frustWidth;
+                            body.Value.Joints[j].Point.y = (theData[(j*3)+2] / 480) * frustHeight;
                             //Joint.Type = JointType.Head; // <- Fix!!!
                             //Debug.Log(body.GetType());
-                            Debug.Log("LLegX: " + Joint.Point.x + ", LLegY: " + Joint.Point.y);
-                            body.Value.Joints.Add(Joint);
+
+                            j++;
                         }
                     }
                 }
