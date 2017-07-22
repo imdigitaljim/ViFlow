@@ -4,7 +4,7 @@ http://www.computationalcreativity.net/iccc2016/accepted-papers-3
 http://www.computationalcreativity.net/iccc2016/wp-content/uploads/2016/06/paper_36-1.pdf  
 
 
-https://drive.google.com/open?id=0B5b5KzHnx3yxTzh0QVFfcW5OYmM
+https://1drv.ms/u/s!Askf6XUBumb7iLhnn5aHf2ZguK7eXg
 
 Extract this into Unity3D/InteractiveDance/Assets  
 so the resulting path is:  
